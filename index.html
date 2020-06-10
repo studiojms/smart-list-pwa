@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="description" content="Smart List" />
+    <meta name="theme-color" content="#000000" />
+  </head>
+  <body>
+    <noscript>
+      <div>
+        <div class="ui teal huge inverted top attached menu">
+          <a class="header item"><%= htmlWebpackPlugin.options.title %></a><a class="item">Home</a>
+        </div>
+        <div class="ui segment">
+          <div class="ui container">
+            <div class="ui huge header">
+              É necessário habilitar o javascript para o correto funcionamento desta página.
+            </div>
+          </div>
+        </div>
+      </div>
+    </noscript>
+    <div id="root"></div>
+  </body>
+</html>
