@@ -1,0 +1,57 @@
+{
+  "icons": [
+    {
+      "src": "icon_192x192.bf9890c6dc27adbcb13ce6fcbdd04575.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon_192x192.bf9890c6dc27adbcb13ce6fcbdd04575.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_144x144.a699fc3afb2077f4da702108b683b6f2.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_96x96.e26b9ee35c3658563172e5a1771500a7.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_72x72.244733d89d6200aaee9ed6acd3c4ead3.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_48x48.abfc87d986dfc90aed1ae77c1f7fe290.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_32x32.59ba440e429e416ccdfdadb3278a6ee7.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_20x20.7970bb39481e3f32cc24eff8a180516a.png",
+      "sizes": "20x20",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_16x16.b78ca877b5f181f4e20191fad923be35.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "name": "SmartList",
+  "short_name": "SmartList",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "SmartList - Supermarket Lists",
+  "background_color": "#ffffff"
+}
