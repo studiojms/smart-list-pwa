@@ -32,11 +32,14 @@ function MobileContainer({ children }: MobileContainerProps): JSX.Element {
           onHide={handleSidebarHide}
           color="orange"
         >
-          <Menu.Item as={Link} to="/new-list" active={location.pathname == '/new-list'} onClick={handleSidebarHide}>
+          {/* <Menu.Item as={Link} to="/new-list" active={location.pathname == '/new-list'} onClick={handleSidebarHide}>
             {t('commom:menu.newList')}
           </Menu.Item>
           <Menu.Item as={Link} to="/lists" active={location.pathname == '/lists'} onClick={handleSidebarHide}>
             {t('commom:menu.lists')}
+          </Menu.Item> */}
+          <Menu.Item as="a" href="https://github.com/studiojms/smart-list-pwa">
+            <Icon name="github" />
           </Menu.Item>
         </Sidebar>
         <Sidebar.Pusher dimmed={sidebarOpened} style={{ minHeight: '100vh' }}>

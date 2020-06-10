@@ -10,6 +10,7 @@ import {
   Label,
   Popup,
   Button,
+  Icon,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -100,6 +101,9 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
             </Dropdown>
           }
         />
+        <a href="https://github.com/studiojms/smart-list-pwa" className="sl-ml--30">
+          <Icon name="github" />
+        </a>
       </Menu.Item>
     </Container>
   );
