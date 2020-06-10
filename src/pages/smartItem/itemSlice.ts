@@ -67,9 +67,16 @@ export const addItem = (text: string): AppThunk => async (dispatch: AppDispatch,
 export const toggleItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
   dispatch(itemSlice.actions.toggleItem(item));
 
-  const items = (await listItems()).filter((i) => i.id != item.id);
+  const items = await listItems();
 
-  saveItems(Array.from(new Set([...items, ...getState().items])));
+  const processedItems = items.map((i) => {
+    if (i.id === item.id) {
+      i.completed = !i.completed;
+    }
+    return i;
+  });
+
+  saveItems(processedItems);
 };
 
 export const removeItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
