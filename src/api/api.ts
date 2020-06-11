@@ -1,4 +1,4 @@
-import { Item } from '../pages/smartItem/types';
+import { Item } from '../pages/home/smartItem/types';
 
 const STORAGE_KEY = 'SL_ITEMS';
 

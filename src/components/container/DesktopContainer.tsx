@@ -18,8 +18,10 @@ import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 
 import logo from '../../assets/images/icon.png';
-import { filterItems, loadItems } from '../../pages/smartItem/itemSlice';
+import { filterItems, loadItems } from '../../pages/home/smartItem/itemSlice';
 import Utils from '../../utils/Utils';
+import AboutModal from '../AboutModal';
+import SelectedFlag from '../SelectedFlag';
 
 interface DesktopContainerProps {
   children: React.ReactElement;
@@ -28,6 +30,7 @@ interface DesktopContainerProps {
 function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
   const [fixed, setFixed] = React.useState(true);
   const [search, setSearch] = React.useState('');
+  const [aboutOpen, setAboutOpen] = React.useState(false);
 
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -73,7 +76,7 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
         <Popup
           content={t('commom:changeLanguage')}
           trigger={
-            <Dropdown basic icon="world">
+            <Dropdown basic icon={null} direction="left" trigger={<SelectedFlag />}>
               <Dropdown.Menu>
                 <Dropdown.Item
                   flag="br"
@@ -101,9 +104,9 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
             </Dropdown>
           }
         />
-        <a href="https://github.com/studiojms/smart-list-pwa" className="sl-ml--30">
-          <Icon name="github" />
-        </a>
+        <div className="sl-pointer">
+          <Icon name="question circle" className="sl-ml--20" onClick={() => setAboutOpen(true)} />
+        </div>
       </Menu.Item>
     </Container>
   );
@@ -130,6 +133,7 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
         {menu}
       </Visibility>
       <Container className="sl-mt--15">{children}</Container>
+      <AboutModal open={aboutOpen} setOpen={setAboutOpen} />
     </Responsive>
   );
 }

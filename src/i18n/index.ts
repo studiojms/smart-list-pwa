@@ -7,7 +7,7 @@ const options: InitOptions = {
   interpolation: {
     escapeValue: false, // not needed for react!!
   },
-  debug: true,
+  debug: false,
   keySeparator: false,
   fallbackLng: 'en',
   ns: ['commom', 'item'],

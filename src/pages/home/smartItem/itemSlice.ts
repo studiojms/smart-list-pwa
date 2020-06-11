@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppDispatch, AppThunk } from '../../redux/store';
+import { AppDispatch, AppThunk } from '../../../redux/store';
 import { Item } from './types';
-import { listItems, saveItems } from '../../api/api';
-import { RootState } from '../../redux/rootReducer';
+import { listItems, saveItems } from '../../../api/api';
+import { RootState } from '../../../redux/rootReducer';
 
 const initialState: Item[] = [];
 
@@ -36,12 +36,12 @@ const itemSlice = createSlice({
   },
 });
 
-export const loadItems = (): AppThunk => async (dispatch: AppDispatch) => {
+const loadItems = (): AppThunk => async (dispatch: AppDispatch) => {
   const items = await listItems();
   dispatch(itemSlice.actions.receiveItems(items));
 };
 
-export const filterItems = (text: string): AppThunk => async (dispatch: AppDispatch) => {
+const filterItems = (text: string): AppThunk => async (dispatch: AppDispatch) => {
   if (text) {
     dispatch(itemSlice.actions.filterItems(text));
   } else {
@@ -50,7 +50,7 @@ export const filterItems = (text: string): AppThunk => async (dispatch: AppDispa
   }
 };
 
-export const addItem = (text: string): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+const addItem = (text: string): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
   const newItem: Item = {
     id: Math.random().toString(36).substr(2, 9),
     completed: false,
@@ -64,7 +64,7 @@ export const addItem = (text: string): AppThunk => async (dispatch: AppDispatch,
   saveItems(Array.from(new Set([...items, newItem])));
 };
 
-export const toggleItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+const toggleItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
   dispatch(itemSlice.actions.toggleItem(item));
 
   const items = await listItems();
@@ -79,14 +79,14 @@ export const toggleItem = (item: Item): AppThunk => async (dispatch: AppDispatch
   saveItems(processedItems);
 };
 
-export const removeItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+const removeItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
   dispatch(itemSlice.actions.removeItem(item));
   const items = (await listItems()).filter((i) => i.id != item.id);
 
   saveItems(items);
 };
 
-export const addItems = (items: string[]): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+const addItems = (items: string[]): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
   const newItems: Item[] = items.map((item) => {
     return {
       id: Math.random().toString(36).substr(2, 9),
@@ -102,3 +102,4 @@ export const addItems = (items: string[]): AppThunk => async (dispatch: AppDispa
 };
 
 export default itemSlice.reducer;
+export { loadItems, filterItems, addItem, toggleItem, removeItem, addItems };

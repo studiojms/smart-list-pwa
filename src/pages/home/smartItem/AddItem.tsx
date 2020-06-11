@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Input, Button, Grid, Popup, Responsive } from 'semantic-ui-react';
+import { Input, Button, Grid, Popup } from 'semantic-ui-react';
 import { useTranslation } from 'react-i18next';
 
 import { addItem } from './itemSlice';
 import AddItemModal from './AddItemModal';
-import Utils from '../../utils/Utils';
+import Utils from '../../../utils/Utils';
 
 function AddItem(): JSX.Element {
   const dispatch = useDispatch();
@@ -13,11 +13,6 @@ function AddItem(): JSX.Element {
   const [open, setOpen] = useState(false);
 
   const { t } = useTranslation();
-
-  let isMobile = false;
-  if (Responsive && Responsive.onlyMobile && Responsive.onlyMobile.maxWidth) {
-    isMobile = Utils.getWidth() > Responsive.onlyMobile.maxWidth;
-  }
 
   return (
     <form
@@ -44,7 +39,7 @@ function AddItem(): JSX.Element {
               action={{
                 primary: true,
                 icon: 'plus',
-                content: isMobile ? t('item:add') : null,
+                content: Utils.isMobile() ? t('item:add') : null,
               }}
               focus
               autoFocus
@@ -54,6 +49,7 @@ function AddItem(): JSX.Element {
             <Popup
               content={t('item:add.voice')}
               trigger={<Button icon="microphone" positive floated="right" onClick={(): void => setOpen(true)} />}
+              position="right center"
             />
           </Grid.Column>
         </Grid.Row>

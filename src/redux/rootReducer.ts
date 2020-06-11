@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import items from '../pages/smartItem/itemSlice';
-import visibilityFilter from '../pages/smartItem/visibilityFilterSlice';
+import items from '../pages/home/smartItem/itemSlice';
+import visibilityFilter from '../pages/home/smartItem/visibilityFilterSlice';
 
 const rootReducer = combineReducers({
   items,

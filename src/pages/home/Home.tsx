@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import AddItem from '../smartItem/AddItem';
-import SmartList from '../smartItem/SmartList';
+import AddItem from './smartItem/AddItem';
+import SmartList from './smartItem/SmartList';
 import { RootState } from '../../redux/rootReducer';
-import { VisibilityFilter } from '../smartItem/visibilityFilterSlice';
-import { Item } from '../smartItem/types';
-import { loadItems } from '../smartItem/itemSlice';
+import { VisibilityFilter } from './smartItem/visibilityFilterSlice';
+import { Item } from './smartItem/types';
+import { loadItems } from './smartItem/itemSlice';
 
 const Home: React.FC<JSX.Element> = () => {
   const dispatch = useDispatch();

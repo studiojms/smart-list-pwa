@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
 
 import { toggleItem, removeItem } from './itemSlice';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch } from '../../../redux/store';
 import { Item } from './types';
 import FilterButton from './FilterButton';
 import { VisibilityFilter } from './visibilityFilterSlice';
@@ -99,7 +99,7 @@ function SmartList({ items }: SmartListProps): JSX.Element {
         header={t('item:remove.title')}
         content={t('item:remove.message')}
         dimmer="blurring"
-        size="tiny"
+        size="mini"
         onCancel={handleCancelDelete}
         onConfirm={() => handleConfirmDelete()}
       />

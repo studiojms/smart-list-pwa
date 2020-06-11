@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import { addItems } from './itemSlice';
+import Utils from '../../../utils/Utils';
 
 interface ItemModalProps {
   open: boolean;
@@ -16,7 +17,7 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
-  const [items, setItems] = useState<string[]>([]);
+  const [spokenItems, setSpokenItems] = useState<string[]>([]);
   const [value, setValue] = useState('');
   const [blocked, setBlocked] = useState(false);
 
@@ -25,13 +26,15 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
   };
 
   const onResult = (result: string) => {
-    setValue(result);
+    if (result) {
+      setValue(result);
 
-    setItems((oldItems) => Array.from(new Set([...oldItems, result])));
+      setSpokenItems((oldItems) => Array.from(new Set([...oldItems, result])));
+    }
   };
 
   const removeItem = (item: string) => {
-    setItems((oldItems) => Array.from(new Set([...oldItems.filter((i) => i != item)])));
+    setSpokenItems((oldItems) => Array.from(new Set([...oldItems.filter((i) => i != item)])));
   };
 
   const onError = (event: any) => {
@@ -50,14 +53,14 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
       };
 
   const onAddItems = () => {
-    dispatch(addItems(items));
+    dispatch(addItems(spokenItems));
     onClose();
   };
 
   const onClose = () => {
     setOpen(false);
     stop();
-    setItems([]);
+    setSpokenItems([]);
   };
 
   return (
@@ -89,9 +92,20 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
             )}
             <List size="huge">
               <strong>{t('item:popup.items')}</strong>
-              {items.map((item, idx) => (
+              {spokenItems.length == 0 && (
+                <List.Item className="sl-pointer">
+                  <List.Content>
+                    <List.Description>{t('item:popup.noItems')}</List.Description>
+                  </List.Content>
+                </List.Item>
+              )}
+              {spokenItems.map((item, idx) => (
                 <List.Item key={idx} className="sl-pointer" onClick={() => removeItem(item)}>
-                  <List.Icon name="trash alternate" color="red" />
+                  <List.Icon
+                    name="trash alternate"
+                    color="red"
+                    className={classnames({ 'sl-pt--15': !Utils.isMobile() })}
+                  />
                   <List.Content>
                     <List.Description>{item}</List.Description>
                   </List.Content>

@@ -8,5 +8,8 @@
   "or": "or",
   "lang.portuguese": "Portuguese",
   "lang.english": "English",
-  "changeLanguage": "Change Language"
+  "changeLanguage": "Change Language",
+  "about.title": "About SmartList",
+  "about.description": "This project was created by ",
+  "about.contribute": "If you want to contribuite, the project is available in github at "
 }
