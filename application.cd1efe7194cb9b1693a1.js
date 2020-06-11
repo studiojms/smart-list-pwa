@@ -1406,18 +1406,17 @@ var App_App = function App() {
 
 
 
-react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(components_App, null), document.getElementById('root')); // if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker
-//       .register('/sw.js')
-//       .then((registration) => {
-//         console.log('SW registered: ', registration);
-//       })
-//       .catch((registrationError) => {
-//         console.log('SW registration failed: ', registrationError);
-//       });
-//   });
-// }
+react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(components_App, null), document.getElementById('root'));
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').then(function (registration) {
+      console.log('SW registered: ', registration);
+    })["catch"](function (registrationError) {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}
 
 /***/ }),
 
@@ -1429,4 +1428,4 @@ react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(component
 /***/ })
 
 },[["/hs+",1,0,4,2,6]]]);
-//# sourceMappingURL=application.b3c849ba192414d57c8e.js.map
+//# sourceMappingURL=application.cd1efe7194cb9b1693a1.js.map
