@@ -17,6 +17,7 @@
   "popup.unsupported": "Seu navegador não suporta a API de speech",
   "popup.listenMessage": "Clique em Falar e fale para adicionar itens.",
   "popup.blockedMic": "O microfone está bloqueado para este site em seu navegador.",
+  "popup.noItems": "Nenhum item pronunciado",
   "popup.stop": "Parar",
   "popup.listen": "Falar",
   "popup.items": "Itens",

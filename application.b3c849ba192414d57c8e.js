@@ -64,7 +64,7 @@ var options = {
     escapeValue: false // not needed for react!!
 
   },
-  debug: true,
+  debug: false,
   keySeparator: false,
   fallbackLng: 'en',
   ns: ['commom', 'item'],
@@ -101,7 +101,7 @@ var Button = __webpack_require__("eaJJ");
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Popup/Popup.js + 4 modules
 var Popup = __webpack_require__("4Qtb");
 
-// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Dropdown/Dropdown.js + 6 modules
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Dropdown/Dropdown.js + 5 modules
 var Dropdown = __webpack_require__("Z606");
 
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Label/Label.js + 2 modules
@@ -199,7 +199,7 @@ function _saveItems() {
 }
 
 
-// CONCATENATED MODULE: ./pages/smartItem/itemSlice.ts
+// CONCATENATED MODULE: ./pages/home/smartItem/itemSlice.ts
 function itemSlice_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function itemSlice_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { itemSlice_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { itemSlice_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -253,6 +253,7 @@ var itemSlice = Object(redux_toolkit_esm["b" /* createSlice */])({
     }
   }
 });
+
 var itemSlice_loadItems = function loadItems() {
   return /*#__PURE__*/function () {
     var _ref = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
@@ -281,6 +282,7 @@ var itemSlice_loadItems = function loadItems() {
     };
   }();
 };
+
 var itemSlice_filterItems = function filterItems(text) {
   return /*#__PURE__*/function () {
     var _ref2 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
@@ -319,6 +321,7 @@ var itemSlice_filterItems = function filterItems(text) {
     };
   }();
 };
+
 var itemSlice_addItem = function addItem(text) {
   return /*#__PURE__*/function () {
     var _ref3 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState) {
@@ -353,6 +356,7 @@ var itemSlice_addItem = function addItem(text) {
     };
   }();
 };
+
 var itemSlice_toggleItem = function toggleItem(item) {
   return /*#__PURE__*/function () {
     var _ref4 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState) {
@@ -389,6 +393,7 @@ var itemSlice_toggleItem = function toggleItem(item) {
     };
   }();
 };
+
 var itemSlice_removeItem = function removeItem(item) {
   return /*#__PURE__*/function () {
     var _ref5 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch, getState) {
@@ -420,6 +425,7 @@ var itemSlice_removeItem = function removeItem(item) {
     };
   }();
 };
+
 var itemSlice_addItems = function addItems(items) {
   return /*#__PURE__*/function () {
     var _ref6 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch, getState) {
@@ -456,7 +462,9 @@ var itemSlice_addItems = function addItems(items) {
     };
   }();
 };
+
 /* harmony default export */ var smartItem_itemSlice = (itemSlice.reducer);
+
 // CONCATENATED MODULE: ./utils/Utils.ts
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -477,12 +485,88 @@ var Utils_Utils = /*#__PURE__*/function () {
       var isSSR = typeof window === 'undefined';
       return isSSR ? Responsive["a" /* default */].onlyTablet.minWidth : window.innerWidth;
     }
+  }, {
+    key: "isMobile",
+    value: function isMobile() {
+      var isMobile = false;
+
+      if (Responsive["a" /* default */] && Responsive["a" /* default */].onlyMobile && Responsive["a" /* default */].onlyMobile.maxWidth) {
+        isMobile = Utils.getWidth() > Responsive["a" /* default */].onlyMobile.maxWidth;
+      }
+
+      return isMobile;
+    }
   }]);
 
   return Utils;
 }();
 
 /* harmony default export */ var utils_Utils = (Utils_Utils);
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Modal/Modal.js + 11 modules
+var Modal = __webpack_require__("nXp5");
+
+// CONCATENATED MODULE: ./components/AboutModal.tsx
+
+
+
+
+function AboutModal(_ref) {
+  var open = _ref.open,
+      setOpen = _ref.setOpen;
+
+  var _useTranslation = Object(useTranslation["a" /* useTranslation */])(),
+      t = _useTranslation.t;
+
+  return /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */], {
+    dimmer: "blurring",
+    open: open,
+    onClose: function onClose() {
+      return setOpen(false);
+    }
+  }, /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Header, null, t('commom:about.title')), /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Content, null, t('commom:about.description'), /*#__PURE__*/react_default.a.createElement("a", {
+    href: "https://github.com/studiojms"
+  }, "Jefferson Mariano de Souza ", /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
+    name: "github"
+  }))), /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Content, null, t('commom:about.contribute'), /*#__PURE__*/react_default.a.createElement("a", {
+    href: "https://github.com/studiojms/smart-list-pwa"
+  }, "https://github.com/studiojms/smart-list-pwa ", /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
+    name: "github alternate"
+  }))));
+}
+
+/* harmony default export */ var components_AboutModal = (AboutModal);
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Flag/Flag.js
+var Flag = __webpack_require__("UbxP");
+
+// CONCATENATED MODULE: ./components/SelectedFlag.tsx
+
+
+
+
+function SelectedFlag() {
+  var _useTranslation = Object(useTranslation["a" /* useTranslation */])(),
+      i18n = _useTranslation.i18n;
+
+  var flag = '';
+
+  switch (i18n.language) {
+    case 'pt-BR':
+      flag = 'br';
+      break;
+
+    case 'en':
+      flag = 'us';
+      break;
+  }
+
+  return flag ? /*#__PURE__*/react_default.a.createElement(Flag["a" /* default */], {
+    name: flag
+  }) : /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
+    name: "world"
+  });
+}
+
+/* harmony default export */ var components_SelectedFlag = (SelectedFlag);
 // CONCATENATED MODULE: ./components/container/DesktopContainer.tsx
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || DesktopContainer_unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -506,6 +590,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 function DesktopContainer(_ref) {
   var children = _ref.children;
 
@@ -518,6 +604,11 @@ function DesktopContainer(_ref) {
       _React$useState4 = _slicedToArray(_React$useState3, 2),
       search = _React$useState4[0],
       setSearch = _React$useState4[1];
+
+  var _React$useState5 = react_default.a.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      aboutOpen = _React$useState6[0],
+      setAboutOpen = _React$useState6[1];
 
   var _useTranslation = Object(useTranslation["a" /* useTranslation */])(),
       t = _useTranslation.t,
@@ -571,7 +662,9 @@ function DesktopContainer(_ref) {
     content: t('commom:changeLanguage'),
     trigger: /*#__PURE__*/react_default.a.createElement(Dropdown["a" /* default */], {
       basic: true,
-      icon: "world"
+      icon: null,
+      direction: "left",
+      trigger: /*#__PURE__*/react_default.a.createElement(components_SelectedFlag, null)
     }, /*#__PURE__*/react_default.a.createElement(Dropdown["a" /* default */].Menu, null, /*#__PURE__*/react_default.a.createElement(Dropdown["a" /* default */].Item, {
       flag: "br",
       onClick: function onClick() {
@@ -591,11 +684,14 @@ function DesktopContainer(_ref) {
         basic: true
       }, t('commom:lang.english'))
     })))
-  }), /*#__PURE__*/react_default.a.createElement("a", {
-    href: "https://github.com/studiojms/smart-list-pwa",
-    className: "sl-ml--30"
+  }), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "sl-pointer"
   }, /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
-    name: "github"
+    name: "question circle",
+    className: "sl-ml--20",
+    onClick: function onClick() {
+      return setAboutOpen(true);
+    }
   }))));
   var menu;
 
@@ -626,7 +722,10 @@ function DesktopContainer(_ref) {
     onBottomPassedReverse: hideFixedMenu
   }, menu), /*#__PURE__*/react_default.a.createElement(Container["a" /* default */], {
     className: "sl-mt--15"
-  }, children));
+  }, children), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
+    open: aboutOpen,
+    setOpen: setAboutOpen
+  }));
 }
 
 /* harmony default export */ var container_DesktopContainer = (DesktopContainer);
@@ -654,60 +753,30 @@ function MobileContainer_arrayWithHoles(arr) { if (Array.isArray(arr)) return ar
 
 
 
+
+
 function MobileContainer(_ref) {
   var children = _ref.children;
 
   var _React$useState = react_default.a.useState(false),
       _React$useState2 = MobileContainer_slicedToArray(_React$useState, 2),
-      sidebarOpened = _React$useState2[0],
-      setSidebarOpened = _React$useState2[1];
+      aboutOpen = _React$useState2[0],
+      setAboutOpen = _React$useState2[1];
 
   var _useTranslation = Object(useTranslation["a" /* useTranslation */])(),
       t = _useTranslation.t,
       i18n = _useTranslation.i18n;
 
   var location = Object(react_router["f" /* useLocation */])();
-
-  var handleSidebarHide = function handleSidebarHide() {
-    return setSidebarOpened(false);
-  };
-
-  var handleToggle = function handleToggle() {
-    return setSidebarOpened(true);
-  };
-
   return /*#__PURE__*/react_default.a.createElement(Responsive["a" /* default */], {
     as: Sidebar["a" /* default */].Pusher,
     getWidth: utils_Utils.getWidth,
     maxWidth: Responsive["a" /* default */].onlyMobile.maxWidth
-  }, /*#__PURE__*/react_default.a.createElement(Sidebar["a" /* default */].Pushable, null, /*#__PURE__*/react_default.a.createElement(Sidebar["a" /* default */], {
-    as: Menu["a" /* default */],
-    animation: "overlay",
-    icon: "labeled",
-    inverted: true,
-    vertical: true,
-    visible: sidebarOpened,
-    onHide: handleSidebarHide,
-    color: "orange"
-  }, /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
-    as: "a",
-    href: "https://github.com/studiojms/smart-list-pwa"
-  }, /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
-    name: "github"
-  }))), /*#__PURE__*/react_default.a.createElement(Sidebar["a" /* default */].Pusher, {
-    dimmed: sidebarOpened,
-    style: {
-      minHeight: '100vh'
-    }
   }, /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */], {
     fixed: "top",
     inverted: true,
     color: "orange"
   }, /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
-    onClick: handleToggle
-  }, /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
-    name: "sidebar"
-  })), /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
     as: react_router_dom["a" /* Link */],
     to: "/",
     active: location.pathname == '/',
@@ -721,9 +790,10 @@ function MobileContainer(_ref) {
   }), " ", t('commom:title')), /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
     position: "right"
   }, /*#__PURE__*/react_default.a.createElement(Dropdown["a" /* default */], {
-    direction: "left",
     basic: true,
-    icon: "world"
+    icon: null,
+    direction: "left",
+    trigger: /*#__PURE__*/react_default.a.createElement(components_SelectedFlag, null)
   }, /*#__PURE__*/react_default.a.createElement(Dropdown["a" /* default */].Menu, null, /*#__PURE__*/react_default.a.createElement(Dropdown["a" /* default */].Item, {
     flag: "br",
     onClick: function onClick() {
@@ -742,9 +812,20 @@ function MobileContainer(_ref) {
       size: "tiny",
       basic: true
     }, t('commom:lang.english'))
-  }))))), /*#__PURE__*/react_default.a.createElement(Container["a" /* default */], {
+  }))), /*#__PURE__*/react_default.a.createElement("div", {
+    className: "sl-pointer"
+  }, /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
+    name: "question circle",
+    className: "sl-ml--20",
+    onClick: function onClick() {
+      return setAboutOpen(true);
+    }
+  })))), /*#__PURE__*/react_default.a.createElement(Container["a" /* default */], {
     className: "sl-mt--80"
-  }, children))));
+  }, children), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
+    open: aboutOpen,
+    setOpen: setAboutOpen
+  }));
 }
 
 /* harmony default export */ var container_MobileContainer = (MobileContainer);
@@ -770,9 +851,6 @@ var Grid = __webpack_require__("zaq1");
 // EXTERNAL MODULE: ../node_modules/react-speech-kit/dist/index.js
 var dist = __webpack_require__("7WGF");
 
-// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Modal/Modal.js + 11 modules
-var Modal = __webpack_require__("nXp5");
-
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/List/List.js + 6 modules
 var List = __webpack_require__("CG8X");
 
@@ -780,7 +858,7 @@ var List = __webpack_require__("CG8X");
 var classnames = __webpack_require__("8Jek");
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
-// CONCATENATED MODULE: ./pages/smartItem/AddItemModal.tsx
+// CONCATENATED MODULE: ./pages/home/smartItem/AddItemModal.tsx
 function AddItemModal_toConsumableArray(arr) { return AddItemModal_arrayWithoutHoles(arr) || AddItemModal_iterableToArray(arr) || AddItemModal_unsupportedIterableToArray(arr) || AddItemModal_nonIterableSpread(); }
 
 function AddItemModal_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -809,6 +887,7 @@ function AddItemModal_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; 
 
 
 
+
 function AddItemModal(_ref) {
   var open = _ref.open,
       setOpen = _ref.setOpen;
@@ -820,8 +899,8 @@ function AddItemModal(_ref) {
 
   var _useState = Object(react["useState"])([]),
       _useState2 = AddItemModal_slicedToArray(_useState, 2),
-      items = _useState2[0],
-      setItems = _useState2[1];
+      spokenItems = _useState2[0],
+      setSpokenItems = _useState2[1];
 
   var _useState3 = Object(react["useState"])(''),
       _useState4 = AddItemModal_slicedToArray(_useState3, 2),
@@ -837,14 +916,16 @@ function AddItemModal(_ref) {
   };
 
   var onResult = function onResult(result) {
-    setValue(result);
-    setItems(function (oldItems) {
-      return Array.from(new Set([].concat(AddItemModal_toConsumableArray(oldItems), [result])));
-    });
+    if (result) {
+      setValue(result);
+      setSpokenItems(function (oldItems) {
+        return Array.from(new Set([].concat(AddItemModal_toConsumableArray(oldItems), [result])));
+      });
+    }
   };
 
   var removeItem = function removeItem(item) {
-    setItems(function (oldItems) {
+    setSpokenItems(function (oldItems) {
       return Array.from(new Set(AddItemModal_toConsumableArray(oldItems.filter(function (i) {
         return i != item;
       }))));
@@ -875,14 +956,14 @@ function AddItemModal(_ref) {
   };
 
   var onAddItems = function onAddItems() {
-    dispatch(itemSlice_addItems(items));
+    dispatch(itemSlice_addItems(spokenItems));
     onClose();
   };
 
   var onClose = function onClose() {
     setOpen(false);
     stop();
-    setItems([]);
+    setSpokenItems([]);
   };
 
   return /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */], {
@@ -907,7 +988,9 @@ function AddItemModal(_ref) {
     size: "large"
   }, t('item:popup.blockedMic'))), /*#__PURE__*/react_default.a.createElement(List["a" /* default */], {
     size: "huge"
-  }, /*#__PURE__*/react_default.a.createElement("strong", null, t('item:popup.items')), items.map(function (item, idx) {
+  }, /*#__PURE__*/react_default.a.createElement("strong", null, t('item:popup.items')), spokenItems.length == 0 && /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Item, {
+    className: "sl-pointer"
+  }, /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Content, null, /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Description, null, t('item:popup.noItems')))), spokenItems.map(function (item, idx) {
     return /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Item, {
       key: idx,
       className: "sl-pointer",
@@ -916,7 +999,10 @@ function AddItemModal(_ref) {
       }
     }, /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Icon, {
       name: "trash alternate",
-      color: "red"
+      color: "red",
+      className: classnames_default()({
+        'sl-pt--15': !utils_Utils.isMobile()
+      })
     }), /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Content, null, /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Description, null, item)));
   })), /*#__PURE__*/react_default.a.createElement(Input["a" /* default */], {
     value: value,
@@ -935,7 +1021,7 @@ function AddItemModal(_ref) {
 }
 
 /* harmony default export */ var smartItem_AddItemModal = (AddItemModal);
-// CONCATENATED MODULE: ./pages/smartItem/AddItem.tsx
+// CONCATENATED MODULE: ./pages/home/smartItem/AddItem.tsx
 function AddItem_slicedToArray(arr, i) { return AddItem_arrayWithHoles(arr) || AddItem_iterableToArrayLimit(arr, i) || AddItem_unsupportedIterableToArray(arr, i) || AddItem_nonIterableRest(); }
 
 function AddItem_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -972,12 +1058,6 @@ function AddItem() {
   var _useTranslation = Object(useTranslation["a" /* useTranslation */])(),
       t = _useTranslation.t;
 
-  var isMobile = false;
-
-  if (Responsive["a" /* default */] && Responsive["a" /* default */].onlyMobile && Responsive["a" /* default */].onlyMobile.maxWidth) {
-    isMobile = utils_Utils.getWidth() > Responsive["a" /* default */].onlyMobile.maxWidth;
-  }
-
   return /*#__PURE__*/react_default.a.createElement("form", {
     onSubmit: function onSubmit(e) {
       e.preventDefault();
@@ -1001,7 +1081,7 @@ function AddItem() {
     action: {
       primary: true,
       icon: 'plus',
-      content: isMobile ? t('item:add') : null
+      content: utils_Utils.isMobile() ? t('item:add') : null
     },
     focus: true,
     autoFocus: true
@@ -1017,7 +1097,8 @@ function AddItem() {
       onClick: function onClick() {
         return setOpen(true);
       }
-    })
+    }),
+    position: "right center"
   })))), /*#__PURE__*/react_default.a.createElement(smartItem_AddItemModal, {
     open: open,
     setOpen: setOpen
@@ -1031,7 +1112,7 @@ var Table = __webpack_require__("LshI");
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/addons/Confirm/Confirm.js
 var Confirm = __webpack_require__("Svs1");
 
-// CONCATENATED MODULE: ./pages/smartItem/visibilityFilterSlice.ts
+// CONCATENATED MODULE: ./pages/home/smartItem/visibilityFilterSlice.ts
 
 var VisibilityFilter;
 
@@ -1054,7 +1135,7 @@ var visibilityFilterSlice = Object(redux_toolkit_esm["b" /* createSlice */])({
 var setVisibilityFilter = visibilityFilterSlice.actions.setVisibilityFilter;
 
 /* harmony default export */ var smartItem_visibilityFilterSlice = (visibilityFilterSlice.reducer);
-// CONCATENATED MODULE: ./pages/smartItem/FilterButton.tsx
+// CONCATENATED MODULE: ./pages/home/smartItem/FilterButton.tsx
 
 
 
@@ -1076,7 +1157,7 @@ function FilterButton(_ref) {
 }
 
 /* harmony default export */ var smartItem_FilterButton = (FilterButton);
-// CONCATENATED MODULE: ./pages/smartItem/SmartList.tsx
+// CONCATENATED MODULE: ./pages/home/smartItem/SmartList.tsx
 function SmartList_slicedToArray(arr, i) { return SmartList_arrayWithHoles(arr) || SmartList_iterableToArrayLimit(arr, i) || SmartList_unsupportedIterableToArray(arr, i) || SmartList_nonIterableRest(); }
 
 function SmartList_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1207,7 +1288,7 @@ function SmartList(_ref) {
     header: t('item:remove.title'),
     content: t('item:remove.message'),
     dimmer: "blurring",
-    size: "tiny",
+    size: "mini",
     onCancel: handleCancelDelete,
     onConfirm: function onConfirm() {
       return handleConfirmDelete();
@@ -1348,4 +1429,4 @@ react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(component
 /***/ })
 
 },[["/hs+",1,0,4,2,6]]]);
-//# sourceMappingURL=application.48177628c2e31181c214.js.map
+//# sourceMappingURL=application.b3c849ba192414d57c8e.js.map
