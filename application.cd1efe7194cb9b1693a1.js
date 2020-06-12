@@ -1410,7 +1410,7 @@ react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(component
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw.js').then(function (registration) {
+    navigator.serviceWorker.register('sw.js').then(function (registration) {
       console.log('SW registered: ', registration);
     })["catch"](function (registrationError) {
       console.log('SW registration failed: ', registrationError);
