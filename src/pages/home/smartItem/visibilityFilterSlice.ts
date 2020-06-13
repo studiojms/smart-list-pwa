@@ -8,6 +8,9 @@ export enum VisibilityFilter {
 
 const initialState = VisibilityFilter.ShowAll;
 
+/**
+ * Redux slice for the visibility filter
+ */
 const visibilityFilterSlice = createSlice({
   name: 'visibilityFilter',
   initialState,

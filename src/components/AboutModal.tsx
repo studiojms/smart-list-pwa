@@ -7,6 +7,12 @@ interface AboutModalProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Displays a modal with information about the app.
+ *
+ * @param {boolean} open indicates if the modal must be shown
+ * @param {func} setOpen function turn the modal shown/hidden
+ */
 function AboutModal({ open, setOpen }: AboutModalProps): JSX.Element {
   const { t } = useTranslation();
 

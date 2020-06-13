@@ -15,6 +15,9 @@ import store from '../redux/store';
 
 const history = createHashHistory();
 
+/**
+ * Main app container
+ */
 const App: React.FC = () => (
   <Provider store={store}>
     <Suspense

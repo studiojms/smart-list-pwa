@@ -13,6 +13,12 @@ interface ItemModalProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Displays a modal to add new items with voice (speaking)
+ *
+ * @param {boolean} open indicates if the modal must be shown
+ * @param {func} setOpen function turn the modal shown/hidden
+ */
 function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -25,6 +31,11 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
     // You could do something here after listening has finished
   };
 
+  /**
+   * Runs when something is captured
+   *
+   * @param result content listened
+   */
   const onResult = (result: string) => {
     if (result) {
       setValue(result);
@@ -33,14 +44,41 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
     }
   };
 
+  /**
+   * Removes an item
+   *
+   * @param item item to be removed
+   */
   const removeItem = (item: string) => {
     setSpokenItems((oldItems) => Array.from(new Set([...oldItems.filter((i) => i != item)])));
   };
 
-  const onError = (event: any) => {
+  /**
+   * Function to be executed when an error occurs
+   *
+   * @param event event with the error
+   */
+  const onError = (event: Record<string, string>) => {
     if (event.error === 'not-allowed') {
       setBlocked(true);
     }
+  };
+
+  /**
+   * Function executed when adding items
+   */
+  const onAddItems = () => {
+    dispatch(addItems(spokenItems));
+    onClose();
+  };
+
+  /**
+   * Function executed when closing the modal
+   */
+  const onClose = () => {
+    setOpen(false);
+    stop();
+    setSpokenItems([]);
   };
 
   const { listen, listening, stop, supported } = useSpeechRecognition({ onResult, onEnd, onError });
@@ -51,17 +89,6 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
         setBlocked(false);
         listen({ lang: i18n.language });
       };
-
-  const onAddItems = () => {
-    dispatch(addItems(spokenItems));
-    onClose();
-  };
-
-  const onClose = () => {
-    setOpen(false);
-    stop();
-    setSpokenItems([]);
-  };
 
   return (
     <Modal dimmer="blurring" open={open} onClose={onClose} centered>

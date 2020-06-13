@@ -1,5 +1,8 @@
 import { Responsive } from 'semantic-ui-react';
 
+/**
+ * Utitilities functions
+ */
 class Utils {
   static getWidth(): number {
     const isSSR = typeof window === 'undefined';

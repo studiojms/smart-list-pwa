@@ -9,6 +9,9 @@ import { VisibilityFilter } from './smartItem/visibilityFilterSlice';
 import { Item } from './smartItem/types';
 import { loadItems } from './smartItem/itemSlice';
 
+/**
+ * App home page
+ */
 const Home: React.FC<JSX.Element> = () => {
   const dispatch = useDispatch();
 

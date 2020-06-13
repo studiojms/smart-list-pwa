@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { toggleItem, removeItem } from './itemSlice';
 import { AppDispatch } from '../../../redux/store';
 import { Item } from './types';
-import FilterButton from './FilterButton';
+import FilterButton from '../../../components/FilterButton';
 import { VisibilityFilter } from './visibilityFilterSlice';
 import { useTranslation } from 'react-i18next';
 
@@ -14,6 +14,11 @@ interface SmartListProps {
   items: Item[];
 }
 
+/**
+ * Renders the list of items
+ *
+ * @param {Item[]} items items of the list
+ */
 function SmartList({ items }: SmartListProps): JSX.Element {
   const [open, setOpen] = useState(false);
   const [itemToBeDeleted, setItemToBeDeleted] = useState<Item>();

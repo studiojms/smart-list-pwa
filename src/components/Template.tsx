@@ -14,6 +14,9 @@ const ResponsiveContainer: React.FC<TemplateProps> = ({ children }: TemplateProp
   </>
 );
 
+/**
+ * Main app template
+ */
 const Template: React.FC<TemplateProps> = ({ children }: TemplateProps) => {
   return <ResponsiveContainer>{children}</ResponsiveContainer>;
 };

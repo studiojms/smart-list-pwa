@@ -27,6 +27,11 @@ interface DesktopContainerProps {
   children: React.ReactElement;
 }
 
+/**
+ * Wide container for the application
+ *
+ * @param children content to be displayed
+ */
 function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
   const [fixed, setFixed] = React.useState(true);
   const [search, setSearch] = React.useState('');

@@ -3,10 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch, AppThunk } from '../../../redux/store';
 import { Item } from './types';
 import { listItems, saveItems } from '../../../api/api';
-import { RootState } from '../../../redux/rootReducer';
 
 const initialState: Item[] = [];
 
+/**
+ * Redux slice to deal with the items
+ */
 const itemSlice = createSlice({
   name: 'items',
   initialState,
@@ -36,11 +38,19 @@ const itemSlice = createSlice({
   },
 });
 
+/**
+ * Loads the items
+ */
 const loadItems = (): AppThunk => async (dispatch: AppDispatch) => {
   const items = await listItems();
   dispatch(itemSlice.actions.receiveItems(items));
 };
 
+/**
+ * Filters the items based on the given text
+ *
+ * @param {string} text text to filter the items
+ */
 const filterItems = (text: string): AppThunk => async (dispatch: AppDispatch) => {
   if (text) {
     dispatch(itemSlice.actions.filterItems(text));
@@ -50,7 +60,12 @@ const filterItems = (text: string): AppThunk => async (dispatch: AppDispatch) =>
   }
 };
 
-const addItem = (text: string): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+/**
+ * Adds a new item to the list
+ *
+ * @param {string} text text of the new item
+ */
+const addItem = (text: string): AppThunk => async (dispatch: AppDispatch) => {
   const newItem: Item = {
     id: Math.random().toString(36).substr(2, 9),
     completed: false,
@@ -64,7 +79,12 @@ const addItem = (text: string): AppThunk => async (dispatch: AppDispatch, getSta
   saveItems(Array.from(new Set([...items, newItem])));
 };
 
-const toggleItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+/**
+ * Marks/unmarks an item as completed
+ *
+ * @param {Item} item item to be toggled
+ */
+const toggleItem = (item: Item): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(itemSlice.actions.toggleItem(item));
 
   const items = await listItems();
@@ -79,14 +99,24 @@ const toggleItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getSt
   saveItems(processedItems);
 };
 
-const removeItem = (item: Item): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+/**
+ * Removes an item from the list
+ *
+ * @param {Item} item item to be removed
+ */
+const removeItem = (item: Item): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(itemSlice.actions.removeItem(item));
   const items = (await listItems()).filter((i) => i.id != item.id);
 
   saveItems(items);
 };
 
-const addItems = (items: string[]): AppThunk => async (dispatch: AppDispatch, getState: () => RootState) => {
+/**
+ * Adds a list of items
+ *
+ * @param {string[]} items items to be added
+ */
+const addItems = (items: string[]): AppThunk => async (dispatch: AppDispatch) => {
   const newItems: Item[] = items.map((item) => {
     return {
       id: Math.random().toString(36).substr(2, 9),

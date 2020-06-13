@@ -7,6 +7,9 @@ import { addItem } from './itemSlice';
 import AddItemModal from './AddItemModal';
 import Utils from '../../../utils/Utils';
 
+/**
+ * Shows the area with commands to add new items
+ */
 function AddItem(): JSX.Element {
   const dispatch = useDispatch();
   const [text, setText] = useState('');

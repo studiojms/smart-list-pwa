@@ -2,6 +2,9 @@ import React from 'react';
 import { Flag, FlagNameValues, Icon } from 'semantic-ui-react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Displays the flag of the selected language
+ */
 function SelectedFlag(): JSX.Element {
   const { i18n } = useTranslation();
 
