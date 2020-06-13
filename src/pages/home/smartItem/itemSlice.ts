@@ -17,7 +17,7 @@ const itemSlice = createSlice({
       return action.payload;
     },
     filterItems(state, action: PayloadAction<string>) {
-      return state.filter((item) => item.text.includes(action.payload));
+      return state.filter((item) => item.text.toLowerCase().includes(action.payload.toLowerCase()));
     },
     addItem(state, action: PayloadAction<Item>): void {
       state.push(action.payload);
