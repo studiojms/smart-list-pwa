@@ -241,7 +241,7 @@ var itemSlice = Object(redux_toolkit_esm["b" /* createSlice */])({
     },
     filterItems: function filterItems(state, action) {
       return state.filter(function (item) {
-        return item.text.includes(action.payload);
+        return item.text.toLowerCase().includes(action.payload.toLowerCase());
       });
     },
     addItem: function addItem(state, action) {
@@ -1567,17 +1567,18 @@ var App_App = function App() {
 
 
 
-react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(components_App, null), document.getElementById('root'));
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('sw.js').then(function (registration) {
-      console.log('SW registered: ', registration);
-    })["catch"](function (registrationError) {
-      console.log('SW registration failed: ', registrationError);
-    });
-  });
-}
+react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(components_App, null), document.getElementById('root')); // if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker
+//       .register('sw.js')
+//       .then((registration) => {
+//         console.log('SW registered: ', registration);
+//       })
+//       .catch((registrationError) => {
+//         console.log('SW registration failed: ', registrationError);
+//       });
+//   });
+// }
 
 /***/ }),
 
@@ -1589,4 +1590,4 @@ if ('serviceWorker' in navigator) {
 /***/ })
 
 },[["/hs+",1,0,4,2,6]]]);
-//# sourceMappingURL=application.e9faa4bdc4e9de19f1cd.js.map
+//# sourceMappingURL=application.012f51c323d69bcc7ec7.js.map
