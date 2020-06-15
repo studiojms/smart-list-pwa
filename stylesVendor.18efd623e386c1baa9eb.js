@@ -1,5 +1,150 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
+/***/ "+Uu6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ../node_modules/@babel/runtime/helpers/extends.js
+var helpers_extends = __webpack_require__("8VmE");
+var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
+
+// EXTERNAL MODULE: ../node_modules/lodash/without.js
+var without = __webpack_require__("nO+f");
+
+// EXTERNAL MODULE: ../node_modules/classnames/index.js
+var classnames = __webpack_require__("8Jek");
+var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
+
+// EXTERNAL MODULE: ../node_modules/prop-types/index.js
+var prop_types = __webpack_require__("W0B4");
+
+// EXTERNAL MODULE: ../node_modules/react/index.js
+var react = __webpack_require__("mXGw");
+var react_default = /*#__PURE__*/__webpack_require__.n(react);
+
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/lib/classNameBuilders.js
+var classNameBuilders = __webpack_require__("5uv1");
+
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/lib/getUnhandledProps.js
+var getUnhandledProps = __webpack_require__("QtO6");
+
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/lib/getElementType.js
+var getElementType = __webpack_require__("+okU");
+
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/lib/index.js + 1 modules
+var lib = __webpack_require__("PeM6");
+
+// CONCATENATED MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Segment/SegmentGroup.js
+
+
+
+
+
+
+/**
+ * A group of segments can be formatted to appear together.
+ */
+
+function SegmentGroup(props) {
+  var children = props.children,
+      className = props.className,
+      compact = props.compact,
+      content = props.content,
+      horizontal = props.horizontal,
+      piled = props.piled,
+      raised = props.raised,
+      size = props.size,
+      stacked = props.stacked;
+  var classes = classnames_default()('ui', size, Object(classNameBuilders["a" /* useKeyOnly */])(compact, 'compact'), Object(classNameBuilders["a" /* useKeyOnly */])(horizontal, 'horizontal'), Object(classNameBuilders["a" /* useKeyOnly */])(piled, 'piled'), Object(classNameBuilders["a" /* useKeyOnly */])(raised, 'raised'), Object(classNameBuilders["a" /* useKeyOnly */])(stacked, 'stacked'), 'segments', className);
+  var rest = Object(getUnhandledProps["a" /* default */])(SegmentGroup, props);
+  var ElementType = Object(getElementType["a" /* default */])(SegmentGroup, props);
+  return react_default.a.createElement(ElementType, extends_default()({}, rest, {
+    className: classes
+  }), lib["a" /* childrenUtils */].isNil(children) ? content : children);
+}
+
+SegmentGroup.handledProps = ["as", "children", "className", "compact", "content", "horizontal", "piled", "raised", "size", "stacked"];
+SegmentGroup.propTypes =  false ? undefined : {};
+/* harmony default export */ var Segment_SegmentGroup = (SegmentGroup);
+// CONCATENATED MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Segment/SegmentInline.js
+
+
+
+
+
+/**
+ * A placeholder segment can be inline.
+ */
+
+function SegmentInline(props) {
+  var children = props.children,
+      className = props.className,
+      content = props.content;
+  var classes = classnames_default()('inline', className);
+  var rest = Object(getUnhandledProps["a" /* default */])(SegmentInline, props);
+  var ElementType = Object(getElementType["a" /* default */])(SegmentInline, props);
+  return react_default.a.createElement(ElementType, extends_default()({}, rest, {
+    className: classes
+  }), lib["a" /* childrenUtils */].isNil(children) ? content : children);
+}
+
+SegmentInline.handledProps = ["as", "children", "className", "content"];
+SegmentInline.propTypes =  false ? undefined : {};
+/* harmony default export */ var Segment_SegmentInline = (SegmentInline);
+// CONCATENATED MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Segment/Segment.js
+
+
+
+
+
+
+
+
+/**
+ * A segment is used to create a grouping of related content.
+ */
+
+function Segment(props) {
+  var attached = props.attached,
+      basic = props.basic,
+      children = props.children,
+      circular = props.circular,
+      className = props.className,
+      clearing = props.clearing,
+      color = props.color,
+      compact = props.compact,
+      content = props.content,
+      disabled = props.disabled,
+      floated = props.floated,
+      inverted = props.inverted,
+      loading = props.loading,
+      placeholder = props.placeholder,
+      padded = props.padded,
+      piled = props.piled,
+      raised = props.raised,
+      secondary = props.secondary,
+      size = props.size,
+      stacked = props.stacked,
+      tertiary = props.tertiary,
+      textAlign = props.textAlign,
+      vertical = props.vertical;
+  var classes = classnames_default()('ui', color, size, Object(classNameBuilders["a" /* useKeyOnly */])(basic, 'basic'), Object(classNameBuilders["a" /* useKeyOnly */])(circular, 'circular'), Object(classNameBuilders["a" /* useKeyOnly */])(clearing, 'clearing'), Object(classNameBuilders["a" /* useKeyOnly */])(compact, 'compact'), Object(classNameBuilders["a" /* useKeyOnly */])(disabled, 'disabled'), Object(classNameBuilders["a" /* useKeyOnly */])(inverted, 'inverted'), Object(classNameBuilders["a" /* useKeyOnly */])(loading, 'loading'), Object(classNameBuilders["a" /* useKeyOnly */])(placeholder, 'placeholder'), Object(classNameBuilders["a" /* useKeyOnly */])(piled, 'piled'), Object(classNameBuilders["a" /* useKeyOnly */])(raised, 'raised'), Object(classNameBuilders["a" /* useKeyOnly */])(secondary, 'secondary'), Object(classNameBuilders["a" /* useKeyOnly */])(stacked, 'stacked'), Object(classNameBuilders["a" /* useKeyOnly */])(tertiary, 'tertiary'), Object(classNameBuilders["a" /* useKeyOnly */])(vertical, 'vertical'), Object(classNameBuilders["b" /* useKeyOrValueAndKey */])(attached, 'attached'), Object(classNameBuilders["b" /* useKeyOrValueAndKey */])(padded, 'padded'), Object(classNameBuilders["d" /* useTextAlignProp */])(textAlign), Object(classNameBuilders["e" /* useValueAndKey */])(floated, 'floated'), 'segment', className);
+  var rest = Object(getUnhandledProps["a" /* default */])(Segment, props);
+  var ElementType = Object(getElementType["a" /* default */])(Segment, props);
+  return react_default.a.createElement(ElementType, extends_default()({}, rest, {
+    className: classes
+  }), lib["a" /* childrenUtils */].isNil(children) ? content : children);
+}
+
+Segment.handledProps = ["as", "attached", "basic", "children", "circular", "className", "clearing", "color", "compact", "content", "disabled", "floated", "inverted", "loading", "padded", "piled", "placeholder", "raised", "secondary", "size", "stacked", "tertiary", "textAlign", "vertical"];
+Segment.Group = Segment_SegmentGroup;
+Segment.Inline = Segment_SegmentInline;
+Segment.propTypes =  false ? undefined : {};
+/* harmony default export */ var Segment_Segment = __webpack_exports__["a"] = (Segment);
+
+/***/ }),
+
 /***/ "+okU":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -8914,4 +9059,4 @@ Grid.propTypes =  false ? undefined : {};
 /***/ })
 
 }]);
-//# sourceMappingURL=stylesVendor.3cfa1498e506d3677e1b.js.map
+//# sourceMappingURL=stylesVendor.18efd623e386c1baa9eb.js.map

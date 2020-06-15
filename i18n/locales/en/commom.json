@@ -1,6 +1,8 @@
 {
   "title": "SmartList",
   "menu.newList": "New List",
+  "menu.removeAll": "Remove All",
+  "menu.removeCompleted": "Remove Completed",
   "menu.lists": "Lists",
   "search": "Search...",
   "signin": "Sign in",
@@ -10,6 +12,17 @@
   "lang.english": "English",
   "changeLanguage": "Change Language",
   "about.title": "About SmartList",
+  "about.version": "Version: ",
   "about.description": "This project was created by ",
-  "about.contribute": "If you want to contribuite, the project is available in github at "
+  "about.contribute": "If you want to contribuite, the project is available in github at ",
+  "remove.all": "Remove All",
+  "remove.all.title": "Remove All Items?",
+  "remove.all.cancel": "Cancel",
+  "remove.all.remove": "Remove",
+  "remove.all.message": "Would you like to remove all items?",
+  "remove.completed": "Remove Completed",
+  "remove.completed.title": "Remove Completed Items?",
+  "remove.completed.cancel": "Cancel",
+  "remove.completed.remove": "Remove",
+  "remove.completed.message": "Would you like to remove all completed items?"
 }

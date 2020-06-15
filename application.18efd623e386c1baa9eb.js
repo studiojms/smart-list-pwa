@@ -116,6 +116,12 @@ var Responsive = __webpack_require__("nnja");
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/behaviors/Visibility/Visibility.js
 var Visibility = __webpack_require__("s22y");
 
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Segment/Segment.js + 2 modules
+var Segment = __webpack_require__("+Uu6");
+
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/addons/Confirm/Confirm.js
+var Confirm = __webpack_require__("Svs1");
+
 // EXTERNAL MODULE: ../node_modules/react-router-dom/esm/react-router-dom.js
 var react_router_dom = __webpack_require__("USb2");
 
@@ -250,6 +256,14 @@ var itemSlice = Object(redux_toolkit_esm["b" /* createSlice */])({
     removeItem: function removeItem(state, action) {
       return state.filter(function (item) {
         return item.id != action.payload.id;
+      });
+    },
+    removeAllItems: function removeAllItems() {
+      return [];
+    },
+    removeCompletedItems: function removeCompletedItems(state) {
+      return state.filter(function (i) {
+        return !i.completed;
       });
     },
     addItems: function addItems(state, action) {
@@ -466,36 +480,22 @@ var itemSlice_removeItem = function removeItem(item) {
   }();
 };
 /**
- * Adds a list of items
+ * Removes all items from the list
  *
- * @param {string[]} items items to be added
  */
 
 
-var itemSlice_addItems = function addItems(items) {
+var itemSlice_removeAllItems = function removeAllItems() {
   return /*#__PURE__*/function () {
     var _ref6 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
-      var newItems, itemList;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              newItems = items.map(function (item) {
-                return {
-                  id: Math.random().toString(36).substr(2, 9),
-                  completed: false,
-                  text: item
-                };
-              });
-              dispatch(itemSlice.actions.addItems(newItems));
-              _context6.next = 4;
-              return listItems();
+              dispatch(itemSlice.actions.removeAllItems());
+              saveItems([]);
 
-            case 4:
-              itemList = _context6.sent;
-              saveItems([].concat(_toConsumableArray(itemList), _toConsumableArray(newItems)));
-
-            case 6:
+            case 2:
             case "end":
               return _context6.stop();
           }
@@ -505,6 +505,86 @@ var itemSlice_addItems = function addItems(items) {
 
     return function (_x6) {
       return _ref6.apply(this, arguments);
+    };
+  }();
+};
+/**
+ * Removes aall completed items from the list
+ *
+ */
+
+
+var itemSlice_removeCompletedItems = function removeCompletedItems() {
+  return /*#__PURE__*/function () {
+    var _ref7 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(dispatch) {
+      var items;
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              dispatch(itemSlice.actions.removeCompletedItems());
+              _context7.next = 3;
+              return listItems();
+
+            case 3:
+              items = _context7.sent.filter(function (i) {
+                return !i.completed;
+              });
+              saveItems(items);
+
+            case 5:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    return function (_x7) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+};
+/**
+ * Adds a list of items
+ *
+ * @param {string[]} items items to be added
+ */
+
+
+var itemSlice_addItems = function addItems(items) {
+  return /*#__PURE__*/function () {
+    var _ref8 = itemSlice_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(dispatch) {
+      var newItems, itemList;
+      return regeneratorRuntime.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              newItems = items.map(function (item) {
+                return {
+                  id: Math.random().toString(36).substr(2, 9),
+                  completed: false,
+                  text: item
+                };
+              });
+              dispatch(itemSlice.actions.addItems(newItems));
+              _context8.next = 4;
+              return listItems();
+
+            case 4:
+              itemList = _context8.sent;
+              saveItems([].concat(_toConsumableArray(itemList), _toConsumableArray(newItems)));
+
+            case 6:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
+    }));
+
+    return function (_x8) {
+      return _ref8.apply(this, arguments);
     };
   }();
 };
@@ -578,7 +658,11 @@ function AboutModal(_ref) {
     onClose: function onClose() {
       return setOpen(false);
     }
-  }, /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Header, null, t('commom:about.title')), /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Content, null, t('commom:about.description'), /*#__PURE__*/react_default.a.createElement("a", {
+  }, /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Header, null, t('commom:about.title')), /*#__PURE__*/react_default.a.createElement(Segment["a" /* default */], {
+    basic: true,
+    compact: true,
+    floated: "right"
+  }, t('commom:about.version'), " ", /*#__PURE__*/react_default.a.createElement("strong", null, "1.0.0" || false)), /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Content, null, t('commom:about.description'), /*#__PURE__*/react_default.a.createElement("a", {
     href: "https://github.com/studiojms"
   }, "Jefferson Mariano de Souza ", /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
     name: "github"
@@ -673,6 +757,16 @@ function DesktopContainer(_ref) {
       aboutOpen = _React$useState6[0],
       setAboutOpen = _React$useState6[1];
 
+  var _React$useState7 = react_default.a.useState(false),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      removeAllOpen = _React$useState8[0],
+      setRemoveAllOpen = _React$useState8[1];
+
+  var _React$useState9 = react_default.a.useState(false),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      removeCompletedOpen = _React$useState10[0],
+      setRemoveCompletedOpen = _React$useState10[1];
+
   var _useTranslation = Object(useTranslation["a" /* useTranslation */])(),
       t = _useTranslation.t,
       i18n = _useTranslation.i18n;
@@ -687,6 +781,24 @@ function DesktopContainer(_ref) {
   var showFixedMenu = function showFixedMenu() {
     return setFixed(true);
   };
+
+  function handleConfirmDeleteRemoveAll() {
+    setRemoveAllOpen(false);
+    dispatch(itemSlice_removeAllItems());
+  }
+
+  function handleCancelDeleteRemoveAll() {
+    setRemoveAllOpen(false);
+  }
+
+  function handleConfirmDeleteRemoveCompleted() {
+    setRemoveCompletedOpen(false);
+    dispatch(itemSlice_removeCompletedItems());
+  }
+
+  function handleCancelDeleteRemoveCompleted() {
+    setRemoveCompletedOpen(false);
+  }
 
   var menuContent = /*#__PURE__*/react_default.a.createElement(Container["a" /* default */], null, /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
     as: react_router_dom["a" /* Link */],
@@ -785,9 +897,49 @@ function DesktopContainer(_ref) {
     onBottomPassedReverse: hideFixedMenu
   }, menu), /*#__PURE__*/react_default.a.createElement(Container["a" /* default */], {
     className: "sl-mt--15"
-  }, children), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
+  }, /*#__PURE__*/react_default.a.createElement(Segment["a" /* default */], {
+    basic: true
+  }, /*#__PURE__*/react_default.a.createElement(Button["a" /* default */], {
+    basic: true,
+    color: "red",
+    size: "tiny",
+    onClick: function onClick() {
+      setRemoveCompletedOpen(true);
+    }
+  }, t('commom:menu.removeCompleted')), /*#__PURE__*/react_default.a.createElement(Button["a" /* default */], {
+    basic: true,
+    color: "red",
+    size: "tiny",
+    onClick: function onClick() {
+      setRemoveAllOpen(true);
+    }
+  }, t('commom:menu.removeAll'))), children), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
     open: aboutOpen,
     setOpen: setAboutOpen
+  }), /*#__PURE__*/react_default.a.createElement(Confirm["a" /* default */], {
+    open: removeAllOpen,
+    cancelButton: t('commom:remove.all.cancel'),
+    confirmButton: t('commom:remove.all.remove'),
+    header: t('commom:remove.all.title'),
+    content: t('commom:remove.all.message'),
+    dimmer: "blurring",
+    size: "mini",
+    onCancel: handleCancelDeleteRemoveAll,
+    onConfirm: function onConfirm() {
+      return handleConfirmDeleteRemoveAll();
+    }
+  }), /*#__PURE__*/react_default.a.createElement(Confirm["a" /* default */], {
+    open: removeCompletedOpen,
+    cancelButton: t('commom:remove.completed.cancel'),
+    confirmButton: t('commom:remove.completed.remove'),
+    header: t('commom:remove.completed.title'),
+    content: t('commom:remove.completed.message'),
+    dimmer: "blurring",
+    size: "mini",
+    onCancel: handleCancelDeleteRemoveCompleted,
+    onConfirm: function onConfirm() {
+      return handleConfirmDeleteRemoveCompleted();
+    }
   }));
 }
 
@@ -830,13 +982,28 @@ function MobileContainer(_ref) {
 
   var _React$useState = react_default.a.useState(false),
       _React$useState2 = MobileContainer_slicedToArray(_React$useState, 2),
-      aboutOpen = _React$useState2[0],
-      setAboutOpen = _React$useState2[1];
+      sidebarOpened = _React$useState2[0],
+      setSidebarOpened = _React$useState2[1];
 
-  var _React$useState3 = react_default.a.useState(''),
+  var _React$useState3 = react_default.a.useState(false),
       _React$useState4 = MobileContainer_slicedToArray(_React$useState3, 2),
-      search = _React$useState4[0],
-      setSearch = _React$useState4[1];
+      aboutOpen = _React$useState4[0],
+      setAboutOpen = _React$useState4[1];
+
+  var _React$useState5 = react_default.a.useState(false),
+      _React$useState6 = MobileContainer_slicedToArray(_React$useState5, 2),
+      removeAllOpen = _React$useState6[0],
+      setRemoveAllOpen = _React$useState6[1];
+
+  var _React$useState7 = react_default.a.useState(false),
+      _React$useState8 = MobileContainer_slicedToArray(_React$useState7, 2),
+      removeCompletedOpen = _React$useState8[0],
+      setRemoveCompletedOpen = _React$useState8[1];
+
+  var _React$useState9 = react_default.a.useState(''),
+      _React$useState10 = MobileContainer_slicedToArray(_React$useState9, 2),
+      search = _React$useState10[0],
+      setSearch = _React$useState10[1];
 
   var _useTranslation = Object(useTranslation["a" /* useTranslation */])(),
       t = _useTranslation.t,
@@ -844,15 +1011,74 @@ function MobileContainer(_ref) {
 
   var location = Object(react_router["f" /* useLocation */])();
   var dispatch = Object(es["b" /* useDispatch */])();
+
+  var handleSidebarHide = function handleSidebarHide() {
+    return setSidebarOpened(false);
+  };
+
+  var handleToggle = function handleToggle() {
+    return setSidebarOpened(true);
+  };
+
+  function handleConfirmDeleteRemoveAll() {
+    setRemoveAllOpen(false);
+    dispatch(itemSlice_removeAllItems());
+    handleSidebarHide();
+  }
+
+  function handleCancelDeleteRemoveAll() {
+    setRemoveAllOpen(false);
+    handleSidebarHide();
+  }
+
+  function handleConfirmDeleteRemoveCompleted() {
+    setRemoveCompletedOpen(false);
+    dispatch(itemSlice_removeCompletedItems());
+    handleSidebarHide();
+  }
+
+  function handleCancelDeleteRemoveCompleted() {
+    setRemoveCompletedOpen(false);
+    handleSidebarHide();
+  }
+
   return /*#__PURE__*/react_default.a.createElement(Responsive["a" /* default */], {
     as: Sidebar["a" /* default */].Pusher,
     getWidth: utils_Utils.getWidth,
     maxWidth: Responsive["a" /* default */].onlyMobile.maxWidth
+  }, /*#__PURE__*/react_default.a.createElement(Sidebar["a" /* default */].Pushable, null, /*#__PURE__*/react_default.a.createElement(Sidebar["a" /* default */], {
+    as: Menu["a" /* default */],
+    animation: "overlay",
+    icon: "labeled",
+    inverted: true,
+    vertical: true,
+    visible: sidebarOpened,
+    onHide: handleSidebarHide,
+    color: "orange"
+  }, /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
+    as: Button["a" /* default */],
+    onClick: function onClick() {
+      setRemoveCompletedOpen(true);
+    }
+  }, t('commom:menu.removeCompleted')), /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
+    as: Button["a" /* default */],
+    onClick: function onClick() {
+      setRemoveAllOpen(true);
+    }
+  }, t('commom:menu.removeAll'))), /*#__PURE__*/react_default.a.createElement(Sidebar["a" /* default */].Pusher, {
+    dimmed: sidebarOpened,
+    style: {
+      minHeight: '100vh'
+    }
   }, /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */], {
     fixed: "top",
     inverted: true,
     color: "orange"
   }, /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
+    onClick: handleToggle
+  }, /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
+    name: "sidebar"
+  })), /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
     as: react_router_dom["a" /* Link */],
     to: "/",
     active: location.pathname == '/',
@@ -924,10 +1150,34 @@ function MobileContainer(_ref) {
       return setAboutOpen(true);
     }
   })))), /*#__PURE__*/react_default.a.createElement(Container["a" /* default */], {
-    className: "sl-mt--80"
-  }, children), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
+    className: "sl-mt--60"
+  }, children))), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
     open: aboutOpen,
     setOpen: setAboutOpen
+  }), /*#__PURE__*/react_default.a.createElement(Confirm["a" /* default */], {
+    open: removeAllOpen,
+    cancelButton: t('commom:remove.all.cancel'),
+    confirmButton: t('commom:remove.all.remove'),
+    header: t('commom:remove.all.title'),
+    content: t('commom:remove.all.message'),
+    dimmer: "blurring",
+    size: "mini",
+    onCancel: handleCancelDeleteRemoveAll,
+    onConfirm: function onConfirm() {
+      return handleConfirmDeleteRemoveAll();
+    }
+  }), /*#__PURE__*/react_default.a.createElement(Confirm["a" /* default */], {
+    open: removeCompletedOpen,
+    cancelButton: t('commom:remove.completed.cancel'),
+    confirmButton: t('commom:remove.completed.remove'),
+    header: t('commom:remove.completed.title'),
+    content: t('commom:remove.completed.message'),
+    dimmer: "blurring",
+    size: "mini",
+    onCancel: handleCancelDeleteRemoveCompleted,
+    onConfirm: function onConfirm() {
+      return handleConfirmDeleteRemoveCompleted();
+    }
   }));
 }
 
@@ -1251,9 +1501,6 @@ function AddItem() {
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/collections/Table/Table.js + 6 modules
 var Table = __webpack_require__("LshI");
 
-// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/addons/Confirm/Confirm.js
-var Confirm = __webpack_require__("Svs1");
-
 // CONCATENATED MODULE: ./pages/home/smartItem/visibilityFilterSlice.ts
 
 var VisibilityFilter;
@@ -1417,7 +1664,9 @@ function SmartList(_ref) {
         }
       })
     }))))));
-  })), /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Footer, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Row, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].HeaderCell, {
+  })), /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Footer, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Row, {
+    className: "sl-pb--0 sl-pt--5"
+  }, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].HeaderCell, {
     width: "10"
   }, /*#__PURE__*/react_default.a.createElement(Label["a" /* default */], {
     basic: true,
@@ -1611,4 +1860,4 @@ react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(component
 /***/ })
 
 },[["/hs+",1,0,4,2,6]]]);
-//# sourceMappingURL=application.3cfa1498e506d3677e1b.js.map
+//# sourceMappingURL=application.18efd623e386c1baa9eb.js.map

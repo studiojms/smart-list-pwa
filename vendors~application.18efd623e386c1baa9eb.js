@@ -32993,6 +32993,36 @@ var localStorage = {
   }
 };
 
+var hasSessionStorageSupport;
+
+try {
+  hasSessionStorageSupport = window !== 'undefined' && window.sessionStorage !== null;
+  var testKey$1 = 'i18next.translate.boo';
+  window.sessionStorage.setItem(testKey$1, 'foo');
+  window.sessionStorage.removeItem(testKey$1);
+} catch (e) {
+  hasSessionStorageSupport = false;
+}
+
+var sessionStorage = {
+  name: 'sessionStorage',
+  lookup: function lookup(options) {
+    var found;
+
+    if (options.lookupsessionStorage && hasSessionStorageSupport) {
+      var lng = window.sessionStorage.getItem(options.lookupsessionStorage);
+      if (lng) found = lng;
+    }
+
+    return found;
+  },
+  cacheUserLanguage: function cacheUserLanguage(lng, options) {
+    if (options.lookupsessionStorage && hasSessionStorageSupport) {
+      window.sessionStorage.setItem(options.lookupsessionStorage, lng);
+    }
+  }
+};
+
 var navigator$1 = {
   name: 'navigator',
   lookup: function lookup(options) {
@@ -33081,7 +33111,7 @@ var subdomain = {
 
 function getDefaults() {
   return {
-    order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
+    order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag'],
     lookupQuerystring: 'lng',
     lookupCookie: 'i18next',
     lookupLocalStorage: 'i18nextLng',
@@ -33123,6 +33153,7 @@ function () {
       this.addDetector(cookie$1);
       this.addDetector(querystring);
       this.addDetector(localStorage);
+      this.addDetector(sessionStorage);
       this.addDetector(navigator$1);
       this.addDetector(htmlTag);
       this.addDetector(path);
@@ -41657,4 +41688,4 @@ module.exports = function (object, key, value) {
 /***/ })
 
 }]);
-//# sourceMappingURL=vendors~application.3cfa1498e506d3677e1b.js.map
+//# sourceMappingURL=vendors~application.18efd623e386c1baa9eb.js.map
