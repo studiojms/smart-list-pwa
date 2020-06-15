@@ -2807,8 +2807,6 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _react = __webpack_require__("mXGw");
 
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
 var useSpeechRecognition = function useSpeechRecognition() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var _props$onEnd = props.onEnd,
@@ -2825,7 +2823,10 @@ var useSpeechRecognition = function useSpeechRecognition() {
       listening = _useState2[0],
       setListening = _useState2[1];
 
-  var supported = !!window.SpeechRecognition;
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      supported = _useState4[0],
+      setSupported = _useState4[1];
 
   var processResult = function processResult(event) {
     var transcript = Array.from(event.results).map(function (result) {
@@ -2848,7 +2849,7 @@ var useSpeechRecognition = function useSpeechRecognition() {
   var listen = function listen() {
     var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    if (listening) return;
+    if (listening || !supported) return;
     var _args$lang = args.lang,
         lang = _args$lang === undefined ? '' : _args$lang,
         _args$interimResults = args.interimResults,
@@ -2878,7 +2879,7 @@ var useSpeechRecognition = function useSpeechRecognition() {
   };
 
   var stop = function stop() {
-    if (!listening) return;
+    if (!listening || !supported) return;
     recognition.current.onresult = function () {};
     recognition.current.onend = function () {};
     recognition.current.onerror = function () {};
@@ -2888,8 +2889,12 @@ var useSpeechRecognition = function useSpeechRecognition() {
   };
 
   (0, _react.useEffect)(function () {
-    if (!supported) return;
-    recognition.current = new window.SpeechRecognition();
+    if (typeof window === 'undefined') return;
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (window.SpeechRecognition) {
+      setSupported(true);
+      recognition.current = new window.SpeechRecognition();
+    }
   }, []);
 
   return {
@@ -4730,24 +4735,6 @@ module.exports = function (it) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-});
-
-var _SpeechRecognition = __webpack_require__("ikqx");
-
-Object.defineProperty(exports, 'SpeechRecognition', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_SpeechRecognition).default;
-  }
-});
-
-var _SpeechSynthesis = __webpack_require__("L8s4");
-
-Object.defineProperty(exports, 'SpeechSynthesis', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_SpeechSynthesis).default;
-  }
 });
 
 var _useSpeechRecognition = __webpack_require__("1cKr");
@@ -12601,7 +12588,10 @@ var useSpeechSynthesis = function useSpeechSynthesis() {
       speaking = _useState4[0],
       setSpeaking = _useState4[1];
 
-  var supported = !!window.speechSynthesis;
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      supported = _useState6[0],
+      setSupported = _useState6[1];
 
   var processVoices = function processVoices(voiceOptions) {
     setVoices(voiceOptions);
@@ -12628,7 +12618,8 @@ var useSpeechSynthesis = function useSpeechSynthesis() {
   };
 
   (0, _react.useEffect)(function () {
-    if (supported) {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      setSupported(true);
       getVoices();
     }
   }, []);
@@ -12642,8 +12633,11 @@ var useSpeechSynthesis = function useSpeechSynthesis() {
         _args$rate = args.rate,
         rate = _args$rate === undefined ? 1 : _args$rate,
         _args$pitch = args.pitch,
-        pitch = _args$pitch === undefined ? 1 : _args$pitch;
+        pitch = _args$pitch === undefined ? 1 : _args$pitch,
+        _args$volume = args.volume,
+        volume = _args$volume === undefined ? 1 : _args$volume;
 
+    if (!supported) return;
     setSpeaking(true);
     // Firefox won't repeat an utterance that has been
     // spoken, so we need to create a new instance each time
@@ -12653,10 +12647,12 @@ var useSpeechSynthesis = function useSpeechSynthesis() {
     utterance.onend = handleEnd;
     utterance.rate = rate;
     utterance.pitch = pitch;
+    utterance.volume = volume;
     window.speechSynthesis.speak(utterance);
   };
 
   var cancel = function cancel() {
+    if (!supported) return;
     setSpeaking(false);
     window.speechSynthesis.cancel();
   };
@@ -16163,125 +16159,6 @@ $({ target: 'Reflect', stat: true }, {
   }
 });
 
-
-/***/ }),
-
-/***/ "L8s4":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _react = __webpack_require__("mXGw");
-
-var _propTypes = __webpack_require__("W0B4");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var propTypes = {
-  children: _propTypes2.default.func.isRequired,
-  onEnd: _propTypes2.default.func
-};
-
-var defaultProps = {
-  onEnd: function onEnd() {}
-};
-
-var SpeechSynthesis = function SpeechSynthesis(props) {
-  var onEnd = props.onEnd,
-      children = props.children;
-
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      voices = _useState2[0],
-      setVoices = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      speaking = _useState4[0],
-      setSpeaking = _useState4[1];
-
-  var supported = !!window.speechSynthesis;
-
-  var processVoices = function processVoices(voiceOptions) {
-    setVoices(voiceOptions);
-  };
-
-  var getVoices = function getVoices() {
-    // Firefox seems to have voices upfront and never calls the
-    // voiceschanged event
-    var voiceOptions = window.speechSynthesis.getVoices();
-    if (voiceOptions.length > 0) {
-      processVoices(voiceOptions);
-      return;
-    }
-
-    window.speechSynthesis.onvoiceschanged = function (event) {
-      voiceOptions = event.target.getVoices();
-      processVoices(voiceOptions);
-    };
-  };
-
-  var handleEnd = function handleEnd() {
-    setSpeaking(false);
-    onEnd();
-  };
-
-  (0, _react.useEffect)(function () {
-    if (supported) {
-      getVoices();
-    }
-  }, []);
-
-  var speak = function speak() {
-    var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var _args$voice = args.voice,
-        voice = _args$voice === undefined ? null : _args$voice,
-        _args$text = args.text,
-        text = _args$text === undefined ? '' : _args$text,
-        _args$rate = args.rate,
-        rate = _args$rate === undefined ? 1 : _args$rate,
-        _args$pitch = args.pitch,
-        pitch = _args$pitch === undefined ? 1 : _args$pitch;
-
-    setSpeaking(true);
-    // Firefox won't repeat an utterance that has been
-    // spoken, so we need to create a new instance each time
-    var utterance = new window.SpeechSynthesisUtterance();
-    utterance.text = text;
-    utterance.voice = voice;
-    utterance.onend = handleEnd;
-    utterance.rate = rate;
-    utterance.pitch = pitch;
-    window.speechSynthesis.speak(utterance);
-  };
-
-  var cancel = function cancel() {
-    setSpeaking(false);
-    window.speechSynthesis.cancel();
-  };
-
-  return children({
-    supported: supported,
-    speak: speak,
-    speaking: speaking,
-    cancel: cancel,
-    voices: voices
-  });
-};
-
-SpeechSynthesis.propTypes = propTypes;
-SpeechSynthesis.defaultProps = defaultProps;
-
-exports.default = (0, _react.memo)(SpeechSynthesis);
 
 /***/ }),
 
@@ -29544,124 +29421,6 @@ module.exports = toPath;
 
 /***/ }),
 
-/***/ "ikqx":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _react = __webpack_require__("mXGw");
-
-var _propTypes = __webpack_require__("W0B4");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var propTypes = {
-  children: _propTypes2.default.func.isRequired,
-  onEnd: _propTypes2.default.func,
-  onResult: _propTypes2.default.func,
-  onError: _propTypes2.default.func
-};
-
-var defaultProps = {
-  onEnd: function onEnd() {},
-  onResult: function onResult() {},
-  onError: function onError() {}
-};
-
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-var SpeechRekognition = function SpeechRekognition(props) {
-  var recognition = (0, _react.useRef)(null);
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      listening = _useState2[0],
-      setListening = _useState2[1];
-
-  var supported = !!window.SpeechRecognition;
-  var children = props.children,
-      onEnd = props.onEnd,
-      onResult = props.onResult,
-      onError = props.onError;
-
-
-  var processResult = function processResult(event) {
-    var transcript = Array.from(event.results).map(function (result) {
-      return result[0];
-    }).map(function (result) {
-      return result.transcript;
-    }).join('');
-
-    onResult(transcript);
-  };
-
-  var handleError = function handleError(event) {
-    if (event.error === 'not-allowed') {
-      recognition.current.onend = function () {};
-      setListening(false);
-    }
-    onError(event);
-  };
-
-  var listen = function listen() {
-    var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    if (listening) return;
-    var _args$lang = args.lang,
-        lang = _args$lang === undefined ? '' : _args$lang,
-        _args$interimResults = args.interimResults,
-        interimResults = _args$interimResults === undefined ? true : _args$interimResults;
-
-    setListening(true);
-    recognition.current.lang = lang;
-    recognition.current.interimResults = interimResults;
-    recognition.current.onresult = processResult;
-    recognition.current.onerror = handleError;
-    // SpeechRecognition stops automatically after inactivity
-    // We want it to keep going until we tell it to stop
-    recognition.current.onend = function () {
-      return recognition.current.start();
-    };
-    recognition.current.start();
-  };
-
-  var stop = function stop() {
-    if (!listening) return;
-    setListening(false);
-    recognition.current.onend = function () {};
-    recognition.current.stop();
-    onEnd();
-  };
-
-  (0, _react.useEffect)(function () {
-    if (!supported) return;
-    recognition.current = new window.SpeechRecognition();
-  }, []);
-
-  return children({
-    listen: listen,
-    listening: listening,
-    stop: stop,
-    supported: supported
-  });
-};
-
-SpeechRekognition.propTypes = propTypes;
-SpeechRekognition.defaultProps = defaultProps;
-
-exports.default = (0, _react.memo)(SpeechRekognition);
-
-/***/ }),
-
 /***/ "iwLE":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41898,4 +41657,4 @@ module.exports = function (object, key, value) {
 /***/ })
 
 }]);
-//# sourceMappingURL=vendors~application.012f51c323d69bcc7ec7.js.map
+//# sourceMappingURL=vendors~application.3cfa1498e506d3677e1b.js.map

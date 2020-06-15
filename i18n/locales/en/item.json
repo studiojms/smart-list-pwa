@@ -11,7 +11,7 @@
   "show.all": "All",
   "show.active": "Active",
   "show.completed": "Completed",
-  "total": "Total items:",
+  "total": "Items:",
   "noItemsFound": "No Item Found",
   "popup.addTitle": "Add Items",
   "popup.unsupported": "It looks like your browser does not support speech API",

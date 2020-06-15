@@ -540,7 +540,7 @@ var Utils_Utils = /*#__PURE__*/function () {
       var isMobile = false;
 
       if (Responsive["a" /* default */] && Responsive["a" /* default */].onlyMobile && Responsive["a" /* default */].onlyMobile.maxWidth) {
-        isMobile = Utils.getWidth() > Responsive["a" /* default */].onlyMobile.maxWidth;
+        isMobile = Utils.getWidth() <= Responsive["a" /* default */].onlyMobile.maxWidth;
       }
 
       return isMobile;
@@ -874,6 +874,7 @@ function MobileContainer(_ref) {
       size: "mini",
       placeholder: t('commom:search'),
       value: search,
+      autoFocus: true,
       onChange: function onChange(e) {
         setSearch(e.target.value);
         dispatch(itemSlice_filterItems(e.target.value));
@@ -1100,6 +1101,7 @@ function AddItemModal(_ref) {
   var toggle = listening ? stop : function () {
     setBlocked(false);
     listen({
+      interimResults: false,
       lang: i18n.language
     });
   };
@@ -1221,7 +1223,7 @@ function AddItem() {
     action: {
       primary: true,
       icon: 'plus',
-      content: utils_Utils.isMobile() ? t('item:add') : null
+      content: !utils_Utils.isMobile() ? t('item:add') : null
     },
     focus: true,
     autoFocus: true
@@ -1329,6 +1331,7 @@ function SmartList_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 /**
  * Renders the list of items
  *
@@ -1367,9 +1370,10 @@ function SmartList(_ref) {
 
   return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */], {
     striped: true,
-    singleLine: true,
     size: "large"
-  }, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Body, null, items.length == 0 && /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Row, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Cell, {
+  }, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Body, {
+    className: "sl-mobile-table"
+  }, items.length == 0 && /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Row, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Cell, {
     colSpan: "2",
     textAlign: "center"
   }, t('item:noItemsFound'))), items.map(function (item) {
@@ -1381,7 +1385,11 @@ function SmartList(_ref) {
       className: "sl-pointer"
     }, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Cell, {
       collapsing: true,
-      colSpan: "2"
+      colSpan: "2",
+      className: "sl-break-spaces"
+    }, /*#__PURE__*/react_default.a.createElement(Grid["a" /* default */], null, /*#__PURE__*/react_default.a.createElement(Grid["a" /* default */].Row, null, /*#__PURE__*/react_default.a.createElement(Grid["a" /* default */].Column, {
+      floated: "left",
+      width: "14"
     }, !item.completed && /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
       name: "square outline",
       size: "large"
@@ -1392,7 +1400,9 @@ function SmartList(_ref) {
       className: classnames_default()('sl-ml--15', {
         'sl-strikethrough': item.completed
       })
-    }, item.text), /*#__PURE__*/react_default.a.createElement(Popup["a" /* default */], {
+    }, item.text)), /*#__PURE__*/react_default.a.createElement(Grid["a" /* default */].Column, {
+      floated: "right"
+    }, /*#__PURE__*/react_default.a.createElement(Popup["a" /* default */], {
       content: t('item:remove'),
       trigger: /*#__PURE__*/react_default.a.createElement(Button["a" /* default */], {
         compact: true,
@@ -1406,7 +1416,7 @@ function SmartList(_ref) {
           setOpen(true);
         }
       })
-    })));
+    }))))));
   })), /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Footer, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].Row, null, /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].HeaderCell, {
     width: "10"
   }, /*#__PURE__*/react_default.a.createElement(Label["a" /* default */], {
@@ -1414,7 +1424,21 @@ function SmartList(_ref) {
     size: "large",
     color: "orange",
     pointing: "right"
-  }, t('item:show')), /*#__PURE__*/react_default.a.createElement(Button["a" /* default */].Group, {
+  }, t('item:show')), utils_Utils.isMobile() && /*#__PURE__*/react_default.a.createElement(Button["a" /* default */].Group, {
+    compact: true,
+    size: "small",
+    color: "blue",
+    vertical: true
+  }, /*#__PURE__*/react_default.a.createElement(components_FilterButton, {
+    visibilityFilter: VisibilityFilter.ShowAll,
+    text: t('item:show.all')
+  }), /*#__PURE__*/react_default.a.createElement(components_FilterButton, {
+    visibilityFilter: VisibilityFilter.ShowActive,
+    text: t('item:show.active')
+  }), /*#__PURE__*/react_default.a.createElement(components_FilterButton, {
+    visibilityFilter: VisibilityFilter.ShowCompleted,
+    text: t('item:show.completed')
+  })), !utils_Utils.isMobile() && /*#__PURE__*/react_default.a.createElement(Button["a" /* default */].Group, {
     compact: true,
     size: "small",
     attached: "right",
@@ -1428,14 +1452,11 @@ function SmartList(_ref) {
   }), /*#__PURE__*/react_default.a.createElement(components_FilterButton, {
     visibilityFilter: VisibilityFilter.ShowCompleted,
     text: t('item:show.completed')
-  }))), /*#__PURE__*/react_default.a.createElement(Table["a" /* default */].HeaderCell, {
-    textAlign: "right",
-    width: "2",
-    colSpan: "3"
-  }, /*#__PURE__*/react_default.a.createElement(Label["a" /* default */], {
+  })), /*#__PURE__*/react_default.a.createElement(Label["a" /* default */], {
     basic: true,
     size: "large",
-    horizontal: true
+    horizontal: true,
+    className: "sl-pull-right"
   }, "".concat(t('item:total'), " ").concat(items.length)))))), /*#__PURE__*/react_default.a.createElement(Confirm["a" /* default */], {
     open: open,
     cancelButton: t('item:remove.cancel'),
@@ -1590,4 +1611,4 @@ react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(component
 /***/ })
 
 },[["/hs+",1,0,4,2,6]]]);
-//# sourceMappingURL=application.012f51c323d69bcc7ec7.js.map
+//# sourceMappingURL=application.3cfa1498e506d3677e1b.js.map
