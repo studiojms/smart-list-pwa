@@ -72,6 +72,9 @@ const plugins = [
     ],
   }),
   new CopyWebpackPlugin({ patterns: [{ from: 'i18n/locales/**/*' }] }),
+  new webpack.DefinePlugin({
+    version: JSON.stringify(process.env.npm_package_version),
+  }),
 ];
 
 const ENV = process.env.NODE_ENV || 'dev';

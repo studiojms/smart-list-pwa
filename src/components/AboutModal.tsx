@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Icon } from 'semantic-ui-react';
+import { Modal, Icon, Segment } from 'semantic-ui-react';
 import { useTranslation } from 'react-i18next';
 
 interface AboutModalProps {
@@ -19,6 +19,9 @@ function AboutModal({ open, setOpen }: AboutModalProps): JSX.Element {
   return (
     <Modal dimmer="blurring" open={open} onClose={() => setOpen(false)}>
       <Modal.Header>{t('commom:about.title')}</Modal.Header>
+      <Segment basic compact floated="right">
+        {t('commom:about.version')} <strong>{version || '-'}</strong>
+      </Segment>
       <Modal.Content>
         {t('commom:about.description')}
         <a href="https://github.com/studiojms">

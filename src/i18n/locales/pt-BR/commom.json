@@ -12,6 +12,7 @@
   "lang.english": "Inglês",
   "changeLanguage": "Alterar Idioma",
   "about.title": "Sobre SmartList",
+  "about.version": "Versão: ",
   "about.description": "Este projeto foi criado por ",
   "about.contribute": "Se você quiser contribuir, o projeto está disponível no github em ",
   "remove.all": "Remover Tudo",
