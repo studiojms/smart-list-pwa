@@ -11,6 +11,8 @@ import {
   Popup,
   Button,
   Icon,
+  Segment,
+  Confirm,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +20,7 @@ import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 
 import logo from '../../assets/images/icon.png';
-import { filterItems, loadItems } from '../../pages/home/smartItem/itemSlice';
+import { filterItems, loadItems, removeAllItems, removeCompletedItems } from '../../pages/home/smartItem/itemSlice';
 import Utils from '../../utils/Utils';
 import AboutModal from '../AboutModal';
 import SelectedFlag from '../SelectedFlag';
@@ -36,6 +38,8 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
   const [fixed, setFixed] = React.useState(true);
   const [search, setSearch] = React.useState('');
   const [aboutOpen, setAboutOpen] = React.useState(false);
+  const [removeAllOpen, setRemoveAllOpen] = React.useState(false);
+  const [removeCompletedOpen, setRemoveCompletedOpen] = React.useState(false);
 
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -43,6 +47,24 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
 
   const hideFixedMenu = (): void => setFixed(false);
   const showFixedMenu = (): void => setFixed(true);
+
+  function handleConfirmDeleteRemoveAll() {
+    setRemoveAllOpen(false);
+    dispatch(removeAllItems());
+  }
+
+  function handleCancelDeleteRemoveAll() {
+    setRemoveAllOpen(false);
+  }
+
+  function handleConfirmDeleteRemoveCompleted() {
+    setRemoveCompletedOpen(false);
+    dispatch(removeCompletedItems());
+  }
+
+  function handleCancelDeleteRemoveCompleted() {
+    setRemoveCompletedOpen(false);
+  }
 
   const menuContent = (
     <Container>
@@ -137,8 +159,54 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
       <Visibility once={false} onBottomPassed={showFixedMenu} onBottomPassedReverse={hideFixedMenu}>
         {menu}
       </Visibility>
-      <Container className="sl-mt--15">{children}</Container>
+      <Container className="sl-mt--15">
+        <Segment basic>
+          <Button
+            basic
+            color="red"
+            size="tiny"
+            onClick={() => {
+              setRemoveCompletedOpen(true);
+            }}
+          >
+            {t('commom:menu.removeCompleted')}
+          </Button>
+          <Button
+            basic
+            color="red"
+            size="tiny"
+            onClick={() => {
+              setRemoveAllOpen(true);
+            }}
+          >
+            {t('commom:menu.removeAll')}
+          </Button>
+        </Segment>
+        {children}
+      </Container>
       <AboutModal open={aboutOpen} setOpen={setAboutOpen} />
+      <Confirm
+        open={removeAllOpen}
+        cancelButton={t('commom:remove.all.cancel')}
+        confirmButton={t('commom:remove.all.remove')}
+        header={t('commom:remove.all.title')}
+        content={t('commom:remove.all.message')}
+        dimmer="blurring"
+        size="mini"
+        onCancel={handleCancelDeleteRemoveAll}
+        onConfirm={() => handleConfirmDeleteRemoveAll()}
+      />
+      <Confirm
+        open={removeCompletedOpen}
+        cancelButton={t('commom:remove.completed.cancel')}
+        confirmButton={t('commom:remove.completed.remove')}
+        header={t('commom:remove.completed.title')}
+        content={t('commom:remove.completed.message')}
+        dimmer="blurring"
+        size="mini"
+        onCancel={handleCancelDeleteRemoveCompleted}
+        onConfirm={() => handleConfirmDeleteRemoveCompleted()}
+      />
     </Responsive>
   );
 }

@@ -25,6 +25,12 @@ const itemSlice = createSlice({
     removeItem(state, action: PayloadAction<Item>) {
       return state.filter((item) => item.id != action.payload.id);
     },
+    removeAllItems() {
+      return [];
+    },
+    removeCompletedItems(state) {
+      return state.filter((i) => !i.completed);
+    },
     addItems(state, action: PayloadAction<Item[]>): void {
       state.push(...action.payload);
     },
@@ -112,6 +118,27 @@ const removeItem = (item: Item): AppThunk => async (dispatch: AppDispatch) => {
 };
 
 /**
+ * Removes all items from the list
+ *
+ */
+const removeAllItems = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(itemSlice.actions.removeAllItems());
+
+  saveItems([]);
+};
+
+/**
+ * Removes aall completed items from the list
+ *
+ */
+const removeCompletedItems = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(itemSlice.actions.removeCompletedItems());
+  const items = (await listItems()).filter((i) => !i.completed);
+
+  saveItems(items);
+};
+
+/**
  * Adds a list of items
  *
  * @param {string[]} items items to be added
@@ -132,4 +159,4 @@ const addItems = (items: string[]): AppThunk => async (dispatch: AppDispatch) =>
 };
 
 export default itemSlice.reducer;
-export { loadItems, filterItems, addItem, toggleItem, removeItem, addItems };
+export { loadItems, filterItems, addItem, toggleItem, removeItem, addItems, removeAllItems, removeCompletedItems };

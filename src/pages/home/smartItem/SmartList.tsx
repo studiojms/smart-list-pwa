@@ -89,7 +89,7 @@ function SmartList({ items }: SmartListProps): JSX.Element {
           ))}
         </Table.Body>
         <Table.Footer>
-          <Table.Row>
+          <Table.Row className="sl-pb--0 sl-pt--5">
             <Table.HeaderCell width="10">
               <Label basic size="large" color="orange" pointing="right">
                 {t('item:show')}
