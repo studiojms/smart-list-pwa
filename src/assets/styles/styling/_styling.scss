@@ -21,3 +21,22 @@
 .sl-strikethrough {
   text-decoration: line-through;
 }
+
+.sl-break-spaces {
+  white-space: break-spaces !important;
+}
+
+.sl-mobile-table {
+  max-height: 70vh;
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sl-pull-left {
+  float: left;
+}
+
+.sl-pull-right {
+  float: right;
+}

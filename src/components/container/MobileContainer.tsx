@@ -57,6 +57,7 @@ function MobileContainer({ children }: MobileContainerProps): JSX.Element {
                 size="mini"
                 placeholder={t('commom:search')}
                 value={search}
+                autoFocus
                 onChange={(e: { target: HTMLInputElement }): void => {
                   setSearch(e.target.value);
                   dispatch(filterItems(e.target.value));

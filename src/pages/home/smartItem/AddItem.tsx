@@ -42,7 +42,7 @@ function AddItem(): JSX.Element {
               action={{
                 primary: true,
                 icon: 'plus',
-                content: Utils.isMobile() ? t('item:add') : null,
+                content: !Utils.isMobile() ? t('item:add') : null,
               }}
               focus
               autoFocus

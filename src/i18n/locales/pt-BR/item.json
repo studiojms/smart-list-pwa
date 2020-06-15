@@ -11,7 +11,7 @@
   "show.all": "Todos",
   "show.active": "Ativos",
   "show.completed": "Completos",
-  "total": "Total de itens:",
+  "total": "Itens:",
   "noItemsFound": "Nenhum Item Encontrado",
   "popup.addTitle": "Adicionar Itens",
   "popup.unsupported": "Seu navegador não suporta a API de speech",

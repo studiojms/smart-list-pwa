@@ -13,7 +13,7 @@ class Utils {
   static isMobile(): boolean {
     let isMobile = false;
     if (Responsive && Responsive.onlyMobile && Responsive.onlyMobile.maxWidth) {
-      isMobile = Utils.getWidth() > Responsive.onlyMobile.maxWidth;
+      isMobile = Utils.getWidth() <= Responsive.onlyMobile.maxWidth;
     }
 
     return isMobile;

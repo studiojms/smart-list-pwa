@@ -87,7 +87,7 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
     ? stop
     : () => {
         setBlocked(false);
-        listen({ lang: i18n.language });
+        listen({ interimResults: false, lang: i18n.language });
       };
 
   return (
