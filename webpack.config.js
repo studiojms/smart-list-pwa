@@ -8,6 +8,9 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
+const ENV = process.env.NODE_ENV || 'dev';
+const isProd = ENV != 'dev';
+
 const plugins = [
   new HtmlWebpackPlugin({
     minify: {
@@ -74,13 +77,11 @@ const plugins = [
   new CopyWebpackPlugin({ patterns: [{ from: 'i18n/locales/**/*' }] }),
   new webpack.DefinePlugin({
     version: JSON.stringify(process.env.npm_package_version),
+    isProd,
   }),
 ];
 
-const ENV = process.env.NODE_ENV || 'dev';
 const VERSION = JSON.stringify(require('./package.json').version).replace(/["']/g, '');
-
-const isProd = ENV != 'dev';
 
 if (isProd) {
   plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
