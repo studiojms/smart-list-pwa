@@ -1,7 +1,7 @@
 {
   "name": "smart-list-pwa",
-  "version": "1.0.0",
-  "description": "A PWA to help with supermarket lists",
+  "version": "1.0.1",
+  "description": "A PWA to help with lists",
   "main": "index.js",
   "repository": "git@github.com:studiojms/smart-list-pwa.git",
   "author": "studiojms",
@@ -13,7 +13,7 @@
     "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}'"
   },
   "resolutions": {
-    "@types/react": "^16.9.35"
+    "@types/react": "^16.9.36"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.3.6",
@@ -24,7 +24,7 @@
     "i18next-xhr-backend": "^3.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-i18next": "^11.5.1",
+    "react-i18next": "^11.6.0",
     "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -47,8 +47,8 @@
     "@types/react-router": "^5.1.7",
     "@types/react-router-dom": "^5.1.5",
     "@types/redux": "^3.6.0",
-    "@typescript-eslint/eslint-plugin": "^3.2.0",
-    "@typescript-eslint/parser": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "@typescript-eslint/parser": "^3.3.0",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.0.2",
     "core-js": "^3.6.5",
