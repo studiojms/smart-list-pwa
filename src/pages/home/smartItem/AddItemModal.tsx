@@ -131,7 +131,7 @@ function AddItemModal({ open, setOpen }: ItemModalProps): JSX.Element {
                   <List.Icon
                     name="trash alternate"
                     color="red"
-                    className={classnames({ 'sl-pt--15': !Utils.isMobile() })}
+                    className={classnames({ 'sl-pt--15': Utils.isMobile() })}
                   />
                   <List.Content>
                     <List.Description>{item}</List.Description>

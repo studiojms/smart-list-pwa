@@ -71,6 +71,35 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
       <Menu.Item as={Link} to="/" header active={location.pathname == '/'}>
         <Image src={logo} size="mini" className="sl-mr--10" /> {t('commom:title')}
       </Menu.Item>
+      <Popup
+        hoverable
+        flowing
+        content={
+          <Segment basic>
+            <Button
+              basic
+              color="red"
+              size="tiny"
+              onClick={() => {
+                setRemoveCompletedOpen(true);
+              }}
+            >
+              {t('commom:menu.removeCompleted')}
+            </Button>
+            <Button
+              basic
+              color="red"
+              size="tiny"
+              onClick={() => {
+                setRemoveAllOpen(true);
+              }}
+            >
+              {t('commom:menu.removeAll')}
+            </Button>
+          </Segment>
+        }
+        trigger={<Menu.Item icon="options" />}
+      />
       <Menu.Item>
         <form
           onSubmit={() => {
@@ -159,31 +188,7 @@ function DesktopContainer({ children }: DesktopContainerProps): JSX.Element {
       <Visibility once={false} onBottomPassed={showFixedMenu} onBottomPassedReverse={hideFixedMenu}>
         {menu}
       </Visibility>
-      <Container className="sl-mt--15">
-        <Segment basic>
-          <Button
-            basic
-            color="red"
-            size="tiny"
-            onClick={() => {
-              setRemoveCompletedOpen(true);
-            }}
-          >
-            {t('commom:menu.removeCompleted')}
-          </Button>
-          <Button
-            basic
-            color="red"
-            size="tiny"
-            onClick={() => {
-              setRemoveAllOpen(true);
-            }}
-          >
-            {t('commom:menu.removeAll')}
-          </Button>
-        </Segment>
-        {children}
-      </Container>
+      <Container className="sl-mt--15">{children}</Container>
       <AboutModal open={aboutOpen} setOpen={setAboutOpen} />
       <Confirm
         open={removeAllOpen}

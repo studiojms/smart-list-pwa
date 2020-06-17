@@ -24,13 +24,13 @@ function AboutModal({ open, setOpen }: AboutModalProps): JSX.Element {
       </Segment>
       <Modal.Content>
         {t('commom:about.description')}
-        <a href="https://github.com/studiojms">
+        <a href="https://github.com/studiojms" target="_blank" rel="noreferrer">
           Jefferson Mariano de Souza <Icon name="github" />
         </a>
       </Modal.Content>
       <Modal.Content>
         {t('commom:about.contribute')}
-        <a href="https://github.com/studiojms/smart-list-pwa">
+        <a href="https://github.com/studiojms/smart-list-pwa" target="_blank" rel="noreferrer">
           https://github.com/studiojms/smart-list-pwa <Icon name="github alternate" />
         </a>
       </Modal.Content>
