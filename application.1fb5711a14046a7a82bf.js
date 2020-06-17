@@ -92,14 +92,17 @@ var Menu = __webpack_require__("4UZT");
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Image/Image.js + 1 modules
 var Image = __webpack_require__("cFof");
 
-// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Input/Input.js
-var Input = __webpack_require__("IDWW");
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Popup/Popup.js + 4 modules
+var Popup = __webpack_require__("4Qtb");
+
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Segment/Segment.js + 2 modules
+var Segment = __webpack_require__("+Uu6");
 
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Button/Button.js + 3 modules
 var Button = __webpack_require__("eaJJ");
 
-// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Popup/Popup.js + 4 modules
-var Popup = __webpack_require__("4Qtb");
+// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Input/Input.js
+var Input = __webpack_require__("IDWW");
 
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/modules/Dropdown/Dropdown.js + 5 modules
 var Dropdown = __webpack_require__("Z606");
@@ -115,9 +118,6 @@ var Responsive = __webpack_require__("nnja");
 
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/behaviors/Visibility/Visibility.js
 var Visibility = __webpack_require__("s22y");
-
-// EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/elements/Segment/Segment.js + 2 modules
-var Segment = __webpack_require__("+Uu6");
 
 // EXTERNAL MODULE: ../node_modules/semantic-ui-react/dist/es/addons/Confirm/Confirm.js
 var Confirm = __webpack_require__("Svs1");
@@ -662,12 +662,16 @@ function AboutModal(_ref) {
     basic: true,
     compact: true,
     floated: "right"
-  }, t('commom:about.version'), " ", /*#__PURE__*/react_default.a.createElement("strong", null, "1.0.0" || false)), /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Content, null, t('commom:about.description'), /*#__PURE__*/react_default.a.createElement("a", {
-    href: "https://github.com/studiojms"
+  }, t('commom:about.version'), " ", /*#__PURE__*/react_default.a.createElement("strong", null, "1.0.1" || false)), /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Content, null, t('commom:about.description'), /*#__PURE__*/react_default.a.createElement("a", {
+    href: "https://github.com/studiojms",
+    target: "_blank",
+    rel: "noreferrer"
   }, "Jefferson Mariano de Souza ", /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
     name: "github"
   }))), /*#__PURE__*/react_default.a.createElement(Modal["a" /* default */].Content, null, t('commom:about.contribute'), /*#__PURE__*/react_default.a.createElement("a", {
-    href: "https://github.com/studiojms/smart-list-pwa"
+    href: "https://github.com/studiojms/smart-list-pwa",
+    target: "_blank",
+    rel: "noreferrer"
   }, "https://github.com/studiojms/smart-list-pwa ", /*#__PURE__*/react_default.a.createElement(Icon["a" /* default */], {
     name: "github alternate"
   }))));
@@ -809,7 +813,30 @@ function DesktopContainer(_ref) {
     src: icon,
     size: "mini",
     className: "sl-mr--10"
-  }), " ", t('commom:title')), /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, null, /*#__PURE__*/react_default.a.createElement("form", {
+  }), " ", t('commom:title')), /*#__PURE__*/react_default.a.createElement(Popup["a" /* default */], {
+    hoverable: true,
+    flowing: true,
+    content: /*#__PURE__*/react_default.a.createElement(Segment["a" /* default */], {
+      basic: true
+    }, /*#__PURE__*/react_default.a.createElement(Button["a" /* default */], {
+      basic: true,
+      color: "red",
+      size: "tiny",
+      onClick: function onClick() {
+        setRemoveCompletedOpen(true);
+      }
+    }, t('commom:menu.removeCompleted')), /*#__PURE__*/react_default.a.createElement(Button["a" /* default */], {
+      basic: true,
+      color: "red",
+      size: "tiny",
+      onClick: function onClick() {
+        setRemoveAllOpen(true);
+      }
+    }, t('commom:menu.removeAll'))),
+    trigger: /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, {
+      icon: "options"
+    })
+  }), /*#__PURE__*/react_default.a.createElement(Menu["a" /* default */].Item, null, /*#__PURE__*/react_default.a.createElement("form", {
     onSubmit: function onSubmit() {
       dispatch(itemSlice_filterItems(search));
     }
@@ -897,23 +924,7 @@ function DesktopContainer(_ref) {
     onBottomPassedReverse: hideFixedMenu
   }, menu), /*#__PURE__*/react_default.a.createElement(Container["a" /* default */], {
     className: "sl-mt--15"
-  }, /*#__PURE__*/react_default.a.createElement(Segment["a" /* default */], {
-    basic: true
-  }, /*#__PURE__*/react_default.a.createElement(Button["a" /* default */], {
-    basic: true,
-    color: "red",
-    size: "tiny",
-    onClick: function onClick() {
-      setRemoveCompletedOpen(true);
-    }
-  }, t('commom:menu.removeCompleted')), /*#__PURE__*/react_default.a.createElement(Button["a" /* default */], {
-    basic: true,
-    color: "red",
-    size: "tiny",
-    onClick: function onClick() {
-      setRemoveAllOpen(true);
-    }
-  }, t('commom:menu.removeAll'))), children), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
+  }, children), /*#__PURE__*/react_default.a.createElement(components_AboutModal, {
     open: aboutOpen,
     setOpen: setAboutOpen
   }), /*#__PURE__*/react_default.a.createElement(Confirm["a" /* default */], {
@@ -1390,7 +1401,7 @@ function AddItemModal(_ref) {
       name: "trash alternate",
       color: "red",
       className: classnames_default()({
-        'sl-pt--15': !utils_Utils.isMobile()
+        'sl-pt--15': utils_Utils.isMobile()
       })
     }), /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Content, null, /*#__PURE__*/react_default.a.createElement(List["a" /* default */].Description, null, item)));
   })), /*#__PURE__*/react_default.a.createElement(Input["a" /* default */], {
@@ -1837,18 +1848,19 @@ var App_App = function App() {
 
 
 
-react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(components_App, null), document.getElementById('root')); // if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker
-//       .register('sw.js')
-//       .then((registration) => {
-//         console.log('SW registered: ', registration);
-//       })
-//       .catch((registrationError) => {
-//         console.log('SW registration failed: ', registrationError);
-//       });
-//   });
-// }
+react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(components_App, null), document.getElementById('root'));
+
+if (true) {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').then(function (registration) {
+        console.log('SW registered: ', registration);
+      })["catch"](function (registrationError) {
+        console.log('SW registration failed: ', registrationError);
+      });
+    });
+  }
+}
 
 /***/ }),
 
@@ -1860,4 +1872,4 @@ react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(component
 /***/ })
 
 },[["/hs+",1,0,4,2,6]]]);
-//# sourceMappingURL=application.18efd623e386c1baa9eb.js.map
+//# sourceMappingURL=application.1fb5711a14046a7a82bf.js.map
