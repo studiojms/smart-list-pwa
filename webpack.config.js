@@ -92,6 +92,16 @@ if (isProd) {
       clientsClaim: true,
       skipWaiting: true,
       cleanupOutdatedCaches: true,
+      mode: isProd ? 'production' : null,
+      offlineGoogleAnalytics: {
+        parameterOverrides: {
+          cd1: 'offline',
+        },
+        hitFilter: (params) => {
+          const queueTimeInSeconds = Math.round(params.get('qt') / 1000);
+          params.set('cm1', queueTimeInSeconds);
+        },
+      },
     }),
   );
 }
