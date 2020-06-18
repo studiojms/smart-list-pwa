@@ -1,6 +1,6 @@
 {
   "name": "smart-list-pwa",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A PWA to help with lists",
   "main": "index.js",
   "repository": "git@github.com:studiojms/smart-list-pwa.git",
@@ -13,14 +13,14 @@
     "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}'"
   },
   "resolutions": {
-    "@types/react": "^16.9.36"
+    "@types/react": "^16.9.38"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.3.6",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "i18next": "^19.4.5",
-    "i18next-browser-languagedetector": "^4.3.0",
+    "i18next-browser-languagedetector": "^4.3.1",
     "i18next-xhr-backend": "^3.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -41,7 +41,7 @@
     "@babel/preset-react": "^7.10.1",
     "@babel/preset-typescript": "^7.10.1",
     "@types/classnames": "^2.2.10",
-    "@types/react": "^16.9.36",
+    "@types/react": "^16.9.38",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.7",
